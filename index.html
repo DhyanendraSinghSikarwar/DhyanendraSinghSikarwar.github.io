@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Monogram favicon. Static fallback below; upgraded by JS to a gradient mark using the profile's initials. -->
+  <link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Crect%20width%3D'100'%20height%3D'100'%20rx%3D'24'%20fill%3D'%234f46e5'%2F%3E%3Ctext%20x%3D'50'%20y%3D'66'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'700'%20font-size%3D'46'%20fill%3D'white'%3EDS%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <title>Dhyanendra Singh - Data Scientist & ML Engineer</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Professional profile of Dhyanendra Singh, a Data Scientist and ML Engineer with 4+ years of experience in machine learning, data pipelines, and full-stack development.">
+  <meta name="keywords" content="Dhyanendra Singh, Data Scientist, Machine Learning Engineer, Python, Django, NIT Bhopal, Data Science, ML, Full Stack Developer">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom styles for non-utility elements -->
+  <style>
+    /* Antialiasing / Scaling fixes for crisp rendering */
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(15, 23, 42, 0.1);
+      border-radius: 9999px;
+    }
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(15, 23, 42, 0.2);
+    }
+
+    /* Mesh Grid Background */
+    .bg-grid-pattern {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image:
+        linear-gradient(to right, rgba(51, 65, 85, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(51, 65, 85, 0.12) 1px, transparent 1px);
+    }
+
+    /* Inline text highlights driven by markers in the data:
+         *number*  -> coloured figure   ^skill^ -> highlighter background   `software` -> pill
+       Colour follows the themed card's --brand-color when present, else the site accent. */
+    :root { --accent: #4f46e5; }   /* indigo-600 (light) */
+    .dark { --accent: #fbbf24; }   /* amber-400 (dark) */
+
+    .hl-num {
+      color: var(--brand-color, var(--accent));
+      font-weight: 700;
+    }
+    .hl-skill {
+      background-color: color-mix(in srgb, var(--brand-color, var(--accent)) 15%, transparent);
+      border-radius: 0.25rem;
+      padding: 0 0.22em;
+      font-weight: 600;
+    }
+    .hl-sw {
+      display: inline-block;
+      padding: 0.02em 0.5em;
+      border-radius: 9999px;
+      font-size: 0.85em;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--brand-color, var(--accent));
+      background-color: color-mix(in srgb, var(--brand-color, var(--accent)) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--brand-color, var(--accent)) 30%, transparent);
+      white-space: nowrap;
+    }
+
+    /* Smooth Height Accordion Classes */
+    .accordion-grid {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-grid.open {
+      grid-template-rows: 1fr;
+    }
+
+    /* Sticky-bar condensed identity: fade its content in/out with the accordion reveal */
+    .mini-identity-inner {
+      opacity: 0;
+      transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #mini-identity.open .mini-identity-inner {
+      opacity: 1;
+    }
+
+    /* Accessibility Skip Link styling */
+    .skip-to-content:focus {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    /* Preferences and Accessibility rules */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ==========================================================
+       PRINT / PDF LAYOUT (Beta)
+       Triggered by the "Download résumé (PDF)" button, which also
+       forces light mode before printing (see downloadResume()).
+       Goal: a clean, ink-friendly, single-column CV of all sections.
+       ========================================================== */
+    @media print {
+      @page { margin: 14mm; }
+
+      body {
+        background: #fff !important;
+        color: #0f172a !important;
+        overflow: visible !important;
+      }
+
+      /* Strip glassmorphism/effects that print poorly */
+      * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
+
+      /* Show sections regardless of the active tab... */
+      .section-pane { display: block !important; margin-bottom: 1.25rem; }
+      main { display: block !important; }
+
+      /* ...but leave FAQ and Recommendations out of the printed CV */
+      #sec-faq, #sec-recommendations { display: none !important; }
+
+      /* Expand all accordions (timeline cards + FAQ answers) */
+      .accordion-grid { grid-template-rows: 1fr !important; }
+      .accordion-grid > div { overflow: visible !important; }
+
+      /* Timeline: collapse the alternating Z-pattern into a clean single column */
+      #sec-workex .absolute { display: none !important; }          /* center rail */
+      #timeline-flow > div { display: block !important; }           /* rows -> block */
+      #timeline-flow .md\:col-span-1 { display: none !important; }  /* dot + rail column */
+      #timeline-flow div:empty { display: none !important; }        /* layout spacers */
+
+      /* Keep cards/blocks from splitting across pages */
+      #timeline-flow > div,
+      #faq-list > div,
+      #recommendations-container > div,
+      #references-grid > *,
+      #competencies-grid > div { break-inside: avoid; }
+
+      /* Links: show as normal text (URLs aren't useful on paper) */
+      a { color: inherit !important; text-decoration: none !important; }
+
+      /* Render logos/photos with their real colours */
+      img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+
+  <!-- Load Sectioned Config Data -->
+  <script src="data/personal.js"></script>
+  <script src="data/overview.js"></script>
+  <script src="data/trajectory.js"></script>
+  <script src="data/faqs.js"></script>
+  <script src="data/recommendations.js"></script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-850 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden relative min-h-screen">
+
+  <!-- Skip to Content Accessibility Link -->
+  <a href="#main-content" class="skip-to-content absolute -top-16 left-4 z-50 bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 px-4 py-2 rounded-md font-semibold text-sm shadow-md transition-all duration-300">
+    Skip to Content
+  </a>
+
+  <!-- Ambient Backdrop Mesh Grid -->
+  <div class="fixed inset-0 bg-grid-pattern -z-30 pointer-events-none print:hidden"></div>
+
+  <!-- Glassmorphic Background Blur Circles -->
+  <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-400/5 dark:bg-indigo-900/10 blur-[120px] -z-40 pointer-events-none print:hidden"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-rose-400/5 dark:bg-rose-900/10 blur-[120px] -z-40 pointer-events-none print:hidden"></div>
+
+  <!-- WRAPPER -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
+
+    <!-- HEADER / HERO -->
+    <header id="hero" class="mb-10 rounded-3xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl p-6 sm:p-10 shadow-xl dark:shadow-slate-950/20 relative overflow-hidden group">
+      <!-- Ambient card illumination -->
+      <div class="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-indigo-500/10 dark:bg-indigo-400/5 blur-[80px] pointer-events-none group-hover:bg-indigo-500/15 transition-all duration-700"></div>
+
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-8 relative z-10">
+        <!-- Profile Picture + résumé download -->
+        <div class="flex flex-col items-center gap-3 flex-shrink-0">
+          <!-- Profile Picture with Elegant Outer Border -->
+          <div class="relative group/img">
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-60 blur-md group-hover/img:opacity-100 transition-opacity duration-500"></div>
+            <div class="relative w-40 h-40 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border-2 border-white dark:border-slate-900 shadow-lg">
+              <img id="profile-img" src="" alt="" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105" width="160" height="160">
+            </div>
+          </div>
+
+          <!-- Download résumé (PDF) — subtle, beta -->
+          <button onclick="downloadResume()" aria-label="Download résumé as PDF (beta)" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>Résumé (PDF)</span>
+            <span class="text-[8px] font-bold uppercase tracking-wider opacity-70">Beta</span>
+          </button>
+        </div>
+
+        <!-- Header Info -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 id="profile-name" class="text-4xl sm:text-5xl font-extrabold font-display tracking-tight text-slate-900 dark:text-white mb-2"></h1>
+          <p id="profile-title" class="text-lg sm:text-xl font-semibold tracking-wide text-indigo-600 dark:text-amber-400 mb-6"></p>
+
+          <!-- Contact Grid -->
+          <div id="contact-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl text-sm font-medium"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- STICKY NAVIGATION BAR (identity tier + section tabs tier) -->
+    <nav class="sticky top-4 z-40 mb-10 rounded-2xl bg-white/70 dark:bg-slate-900/70 border border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md shadow-lg dark:shadow-slate-950/20 overflow-hidden print:hidden">
+
+      <!-- Tier 1: Condensed identity — revealed once the hero scrolls out of view -->
+      <div id="mini-identity" class="accordion-grid">
+        <div class="mini-identity-inner overflow-hidden">
+          <div class="flex items-center justify-between gap-3 px-3 pt-2.5 pb-2">
+            <!-- Avatar + name (click to return to top) -->
+            <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Back to top" class="group flex items-center gap-2.5 min-w-0 rounded-lg focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+              <img id="mini-avatar" src="" alt="" class="w-8 h-8 rounded-lg object-cover object-top border border-slate-200/60 dark:border-slate-700/60 shadow-sm flex-shrink-0">
+              <span id="mini-name" class="font-display font-bold text-sm text-slate-900 dark:text-white truncate group-hover:text-indigo-600 dark:group-hover:text-amber-400 transition-colors duration-200"></span>
+            </button>
+            <!-- Contact icons + résumé (populated by JS) -->
+            <div id="mini-contacts" class="flex items-center gap-0.5 flex-shrink-0"></div>
+          </div>
+          <div class="mx-3 border-t border-slate-200/60 dark:border-slate-800/60"></div>
+        </div>
+      </div>
+
+      <!-- Tier 2: Section tabs + theme toggle (always visible) -->
+      <div class="flex items-center justify-between gap-2 p-2 overflow-x-auto">
+        <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none flex-1">
+          <button onclick="setSection('overview')" id="nav-overview" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+            Overview
+          </button>
+          <button onclick="setSection('workex')" id="nav-workex" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+            Career Trajectory
+          </button>
+          <button onclick="setSection('faq')" id="nav-faq" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+            FAQ
+          </button>
+          <button onclick="setSection('recommendations')" id="nav-recommendations" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+            Recommendations
+          </button>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button onclick="toggleTheme()" aria-label="Toggle visual theme" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-all duration-300 flex-shrink-0">
+          <!-- Sun Icon (Light Mode) -->
+          <svg id="theme-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon (Dark Mode) -->
+          <svg id="theme-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- MAIN CONTENT SECTIONS -->
+    <main id="main-content" class="space-y-12 outline-none">
+
+      <!-- SECTION: OVERVIEW -->
+      <section id="sec-overview" class="section-pane">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+          <!-- Bio & Global Footprint Panel -->
+          <div class="md:col-span-2 space-y-6">
+            <p id="overview-bio" class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 font-medium"></p>
+
+            <!-- Geographic / Global Footprint Widget (heading + visibility set by JS) -->
+            <div id="footprint-widget" class="p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-amber-400 mb-3 flex items-center gap-2">
+                <i data-lucide="globe" class="w-4 h-4"></i> <span id="footprint-heading">Global Footprint</span>
+              </h3>
+              <p id="global-footprint-text" class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-4"></p>
+
+              <div class="flex flex-wrap gap-2.5" id="overview-countries"></div>
+            </div>
+          </div>
+
+          <!-- Quick Facts Sidepanel -->
+          <div class="rounded-3xl bg-gradient-to-b from-indigo-500/5 to-purple-500/5 dark:from-indigo-950/10 dark:to-purple-950/10 border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6">
+            <h3 class="text-lg font-bold font-display text-slate-900 dark:text-white flex items-center gap-2">
+              <i data-lucide="briefcase" class="w-5 h-5 text-indigo-500"></i> Executive Profile
+            </h3>
+
+            <div id="quick-facts" class="text-sm font-medium"></div>
+          </div>
+        </div>
+
+        <!-- Competencies Section -->
+        <div class="mt-12">
+          <h3 class="text-xl font-bold font-display tracking-tight text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+            <i data-lucide="grid" class="w-5 h-5 text-indigo-500"></i> Core Competencies
+          </h3>
+          <div id="competencies-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+      </section>
+
+      <!-- SECTION: CAREER TRAJECTORY (Z-PATTERN TIMELINE) -->
+      <section id="sec-workex" class="section-pane hidden">
+        <!-- Timeline Container -->
+        <div class="relative overflow-hidden w-full px-1">
+          <!-- Timeline Rail - Desktop Center, Mobile Left -->
+          <div class="absolute left-6 md:left-1/2 top-4 bottom-4 w-0.5 bg-slate-200 dark:bg-slate-800 transform -translate-x-1/2 pointer-events-none"></div>
+
+          <!-- Timeline Container (Z-pattern rows inserted dynamically) -->
+          <div id="timeline-flow" class="relative space-y-10 md:space-y-6"></div>
+        </div>
+      </section>
+
+      <!-- SECTION: FAQ -->
+      <section id="sec-faq" class="section-pane hidden">
+        <div id="faq-list" class="space-y-4 max-w-3xl"></div>
+      </section>
+
+      <!-- SECTION: RECOMMENDATIONS -->
+      <section id="sec-recommendations" class="section-pane hidden">
+        <div id="recommendations-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 border-t border-slate-200/50 dark:border-slate-800/50 pt-8 text-center text-xs text-slate-400 dark:text-slate-500 font-medium">
+      <p class="mb-2">&copy; <span id="copyright-year"></span> <span id="copyright-name"></span>. All rights reserved.</p>
+      <p>Modular Portfolio Format &bull; Built with Tailwind CSS & Lucide Icons</p>
+    </footer>
+
+  </div>
+
+  <!-- APPLICATION JAVASCRIPT -->
+  <script>
+    // Constants & DOM Nodes
+    const themeSun = document.getElementById('theme-sun');
+    const themeMoon = document.getElementById('theme-moon');
+
+    // Document Ready Initialisation
+    window.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initAppContent();
+      setSection('overview');
+      initStickyIdentity();
+
+      // Footer copyright
+      document.getElementById('copyright-year').textContent = new Date().getFullYear();
+      document.getElementById('copyright-name').textContent = PERSONAL_DATA.name;
+    });
+
+    // Reveal the condensed identity in the sticky bar once the hero scrolls out of view.
+    function initStickyIdentity() {
+      const hero = document.getElementById('hero');
+      const miniIdentity = document.getElementById('mini-identity');
+      if (!hero || !miniIdentity || !('IntersectionObserver' in window)) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // Hero visible -> hide condensed identity; hero gone -> reveal it.
+          miniIdentity.classList.toggle('open', !entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+
+      observer.observe(hero);
+    }
+
+    // Theme Management (Light/Dark)
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+        themeSun.classList.remove('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeMoon.classList.remove('hidden');
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+      if (isDark) {
+        themeSun.classList.remove('hidden');
+        themeMoon.classList.add('hidden');
+      } else {
+        themeSun.classList.add('hidden');
+        themeMoon.classList.remove('hidden');
+      }
+
+      // Update dynamic brand colors according to theme
+      updateDynamicBrandStyles();
+    }
+
+    // Download résumé as PDF (Beta) via the browser's print -> Save as PDF.
+    // Forces light mode for the printout (regardless of on-screen theme), then restores it.
+    function downloadResume() {
+      const wasDark = document.documentElement.classList.contains('dark');
+      if (wasDark) {
+        document.documentElement.classList.remove('dark');
+        const restore = () => {
+          document.documentElement.classList.add('dark');
+          window.removeEventListener('afterprint', restore);
+        };
+        window.addEventListener('afterprint', restore);
+      }
+      window.print();
+    }
+
+    // Nav pane controller
+    function setSection(sectionId) {
+      // Toggle nav tab style
+      document.querySelectorAll('.nav-tab').forEach(tab => {
+        const id = tab.id.replace('nav-', '');
+        if (id === sectionId) {
+          tab.className = 'nav-tab px-4 py-2.5 rounded-xl text-sm font-bold tracking-wide bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 shadow-md transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none';
+        } else {
+          tab.className = 'nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none';
+        }
+      });
+
+      // Hide / show section panels
+      document.querySelectorAll('.section-pane').forEach(panel => {
+        const id = panel.id.replace('sec-', '');
+        if (id === sectionId) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
+
+      // Rerun Lucide icon rendering
+      lucide.createIcons();
+    }
+
+    // Convert inline highlight markers in user text to styled spans:
+    //   *…* significant number (coloured)   ^…^ skill (highlight bg)   `…` software (pill)
+    // Markers don't nest; other HTML in the string (e.g. <br>) is left untouched.
+    function formatText(str) {
+      if (str == null) return '';
+      return String(str)
+        .replace(/`([^`]+)`/g, '<span class="hl-sw">$1</span>')
+        .replace(/\^([^^]+)\^/g, '<span class="hl-skill">$1</span>')
+        .replace(/\*([^*]+)\*/g, '<span class="hl-num">$1</span>');
+    }
+
+    // Derive up-to-two-letter initials from a name (e.g. "Dhyanendra Singh" -> "DS").
+    function initialsFrom(name) {
+      return name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    // Build a rounded-square gradient monogram SVG (no emoji/font-glyph dependency).
+    function monogramSVG(initials) {
+      return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
+        + "<defs><linearGradient id='adg' x1='0' y1='0' x2='1' y2='1'>"
+        + "<stop offset='0' stop-color='#6366f1'/><stop offset='.5' stop-color='#a855f7'/><stop offset='1' stop-color='#ec4899'/>"
+        + "</linearGradient></defs>"
+        + "<rect width='100' height='100' rx='24' fill='url(#adg)'/>"
+        + "<text x='50' y='66' text-anchor='middle' font-family='Plus Jakarta Sans, Inter, Arial, sans-serif' font-weight='700' font-size='46' fill='#fff'>"
+        + initials + "</text></svg>";
+    }
+
+    // --- Derived profile facts (computed from TRAJECTORY_DATA) ---
+    const MONTH_IDX = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+
+    // Parse "MMM YYYY" or "YYYY" into a Date (day 1); null if unparseable.
+    function parseWhen(s) {
+      s = (s || '').trim();
+      const mo = s.match(/^([A-Za-z]{3,})\s+(\d{4})$/);
+      if (mo) return new Date(+mo[2], MONTH_IDX[mo[1].slice(0, 3).toLowerCase()] || 0, 1);
+      const yr = s.match(/^(\d{4})$/);
+      if (yr) return new Date(+yr[1], 0, 1);
+      return null;
+    }
+
+    // Split a "start - end" period; an end of Present/Current/Now (or blank) means today.
+    function parsePeriod(period) {
+      const parts = String(period || '').split(/\s*[-–—]\s*/);
+      const start = parseWhen(parts[0]);
+      const endStr = parts.length > 1 ? parts[1] : parts[0];
+      const end = /present|current|now/i.test(endStr) ? new Date() : parseWhen(endStr);
+      return { start, end };
+    }
+
+    function monthsBetween(a, b) {
+      return Math.max(0, (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()));
+    }
+
+    // Total professional experience = summed duration of 'work' roles (Present -> today).
+    // Shown in months up to 24, then in whole years.
+    function computeExperience() {
+      let months = 0;
+      TRAJECTORY_DATA.forEach(e => {
+        if (e.type !== 'work') return;
+        const { start, end } = parsePeriod(e.period);
+        if (start && end) months += monthsBetween(start, end);
+      });
+      if (months < 24) return months + (months === 1 ? ' Month' : ' Months');
+      const years = Math.floor(months / 12);
+      return years + (years === 1 ? ' Year' : ' Years');
+    }
+
+    // The role currently held (period ending in Present), else the most recent entry.
+    function currentRole() {
+      return TRAJECTORY_DATA.find(e => /present|current|now/i.test(e.period)) || TRAJECTORY_DATA[0];
+    }
+
+    // Countries (with flag) + city count from trajectory locations ("City, Country").
+    // Heading/text adapt: "Global" for multiple countries, "Geographic" for one.
+    function deriveFootprint() {
+      const countryFlag = new Map();   // insertion order = first appearance
+      const cities = new Set();
+      TRAJECTORY_DATA.forEach(e => {
+        if (!e.location) return;
+        const parts = e.location.split(',').map(s => s.trim()).filter(Boolean);
+        if (parts.length) cities.add(parts[0]);
+        const country = parts[parts.length - 1];
+        if (country && !countryFlag.has(country)) countryFlag.set(country, e.flag || '');
+      });
+      const countries = [...countryFlag].map(([name, flag]) => ({ name, flag }));
+      const nC = countries.length, nCity = cities.size;
+      const cityWord = nCity === 1 ? 'city' : 'cities';
+      let heading, text;
+      if (nC > 1) {
+        heading = 'Global Footprint';
+        text = `Global footprint across ${nC} countries & ${nCity} ${cityWord}`;
+      } else {
+        heading = 'Geographic Footprint';
+        const only = countries[0] ? countries[0].name : '';
+        text = `Footprint across ${nCity} ${cityWord}${only ? ' in ' + only : ''}`;
+      }
+      return { countries, cities: nCity, heading, text };
+    }
+
+    // Dynamic APP rendering (Modularity core)
+    function initAppContent() {
+      // Personal Details
+      document.getElementById('profile-name').textContent = PERSONAL_DATA.name;
+      document.getElementById('profile-title').textContent = PERSONAL_DATA.title;
+      document.getElementById('profile-img').src = PERSONAL_DATA.profileImage;
+      document.getElementById('profile-img').alt = `Professional profile photo of ${PERSONAL_DATA.name}`;
+
+      // Brand monogram — used for the favicon/tab icon only (auto initials from name)
+      const monogram = monogramSVG(initialsFrom(PERSONAL_DATA.name));
+      document.getElementById('favicon').setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(monogram));
+
+      // Condensed identity in the sticky bar (avatar, name, contact icons + résumé)
+      document.getElementById('mini-avatar').src = PERSONAL_DATA.profileImage;
+      document.getElementById('mini-avatar').alt = PERSONAL_DATA.name;
+      document.getElementById('mini-name').textContent = PERSONAL_DATA.name;
+      const miniContacts = document.getElementById('mini-contacts');
+      miniContacts.innerHTML = '';
+      const miniItemClass = 'p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-amber-400 hover:bg-slate-100/60 dark:hover:bg-slate-800/60 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-200';
+      PERSONAL_DATA.contacts.forEach(contact => {
+        const a = document.createElement('a');
+        a.href = contact.href;
+        if (contact.type === 'linkedin' || contact.type === 'github' || contact.type === 'medium') a.target = '_blank';
+        a.setAttribute('aria-label', contact.label);
+        a.title = contact.label;
+        a.className = miniItemClass;
+        a.innerHTML = `<i data-lucide="${contact.icon}" class="w-4 h-4"></i>`;
+        miniContacts.appendChild(a);
+      });
+      const miniPdf = document.createElement('button');
+      miniPdf.setAttribute('onclick', 'downloadResume()');
+      miniPdf.setAttribute('aria-label', 'Download résumé as PDF (beta)');
+      miniPdf.title = 'Download résumé (PDF) — Beta';
+      miniPdf.className = miniItemClass + ' ml-0.5 border-l border-slate-200/60 dark:border-slate-700/60 pl-2 rounded-l-none';
+      miniPdf.innerHTML = `<i data-lucide="download" class="w-4 h-4"></i>`;
+      miniContacts.appendChild(miniPdf);
+
+      // Contact info
+      const contactGrid = document.getElementById('contact-grid');
+      contactGrid.innerHTML = '';
+      PERSONAL_DATA.contacts.forEach(contact => {
+        const card = document.createElement('a');
+        card.href = contact.href;
+        if (contact.type === 'linkedin' || contact.type === 'github' || contact.type === 'medium') card.target = '_blank';
+        card.className = 'flex items-center gap-3 p-3 rounded-xl bg-white/20 dark:bg-slate-900/20 border border-slate-200/40 dark:border-slate-800/40 hover:bg-white/50 dark:hover:bg-slate-900/50 hover:border-indigo-500/40 dark:hover:border-amber-400/40 hover:shadow-md transition-all duration-300 text-slate-700 dark:text-slate-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none';
+
+        card.innerHTML = `
+          <div class="p-2 rounded-lg bg-indigo-500/10 dark:bg-amber-400/10 text-indigo-600 dark:text-amber-400">
+            <i data-lucide="${contact.icon}" class="w-4 h-4"></i>
+          </div>
+          <span class="truncate">${contact.label}</span>
+        `;
+        contactGrid.appendChild(card);
+      });
+
+      lucide.createIcons();
+
+      // Overview Summary
+      document.getElementById('overview-bio').innerHTML = formatText(OVERVIEW_DATA.bio);
+
+      // Geographic / Global Footprint — derived from trajectory locations.
+      // Hidden entirely when there's only a single city (a "footprint" needs more than one place).
+      const footprint = deriveFootprint();
+      const footprintWidget = document.getElementById('footprint-widget');
+      if (footprint.cities <= 1) {
+        footprintWidget.classList.add('hidden');
+      } else {
+        footprintWidget.classList.remove('hidden');
+        document.getElementById('footprint-heading').textContent = footprint.heading;
+        document.getElementById('global-footprint-text').textContent = footprint.text;
+
+        const countriesWrapper = document.getElementById('overview-countries');
+        countriesWrapper.innerHTML = '';
+        footprint.countries.forEach(country => {
+          const badge = document.createElement('div');
+          badge.className = 'flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/5 dark:bg-amber-400/5 border border-indigo-500/10 dark:border-amber-400/10 text-sm font-semibold';
+          badge.innerHTML = `<span>${country.flag}</span> <span class="text-slate-700 dark:text-slate-300">${country.name}</span>`;
+          countriesWrapper.appendChild(badge);
+        });
+      }
+
+      // Quick Facts (Executive Profile sidepanel).
+      // Current Position + Experience are computed from TRAJECTORY_DATA; the rest are user inputs.
+      const cr = currentRole();
+      const quickFactsData = [
+        { label: 'Current Position', value: `${cr.role}, ${cr.company}`, emphasis: true },
+        { label: 'Experience', value: computeExperience() }
+      ].concat(OVERVIEW_DATA.quickFacts || []);
+      const quickFacts = document.getElementById('quick-facts');
+      quickFacts.innerHTML = '';
+      quickFactsData.forEach(fact => {
+        const row = document.createElement('div');
+        if (fact.emphasis) {
+          row.className = 'flex flex-col justify-center gap-1 min-h-[56px] pb-3 border-b border-slate-200/50 dark:border-slate-800/50';
+          row.innerHTML = `
+            <span class="text-xs font-semibold text-slate-500">${fact.label}</span>
+            <span class="text-slate-900 dark:text-white font-bold text-sm leading-tight">${fact.value}</span>
+          `;
+        } else {
+          row.className = 'flex items-center min-h-[56px] py-2';
+          row.innerHTML = `
+            <span class="text-slate-500">${fact.label}</span>
+            <span class="flex-1 text-right text-slate-800 dark:text-slate-200 font-bold">${fact.value}</span>
+          `;
+        }
+        quickFacts.appendChild(row);
+      });
+
+      // Competencies
+      const compGrid = document.getElementById('competencies-grid');
+      compGrid.innerHTML = '';
+      OVERVIEW_DATA.competencies.forEach(comp => {
+        const block = document.createElement('div');
+        block.className = 'p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-md hover:shadow-lg hover:border-indigo-500/30 dark:hover:border-amber-400/30 transition-all duration-300 group';
+        block.innerHTML = `
+          <div class="flex items-center gap-3 mb-3">
+            ${comp.icon ? `
+              <div class="flex-shrink-0 p-2 rounded-lg bg-indigo-500/10 dark:bg-amber-400/10 text-indigo-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-300">
+                <i data-lucide="${comp.icon}" class="w-5 h-5"></i>
+              </div>
+            ` : ''}
+            <h4 class="text-base font-bold font-display text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-amber-400 transition-colors duration-300">${comp.title}</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-slate-500 dark:text-slate-400 font-medium">${formatText(comp.description)}</p>
+        `;
+        compGrid.appendChild(block);
+      });
+
+      // FAQs
+      const faqList = document.getElementById('faq-list');
+      faqList.innerHTML = '';
+      FAQS_DATA.forEach((faq, index) => {
+        const item = document.createElement('div');
+        item.className = 'border border-slate-200/50 dark:border-slate-800/50 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow transition-shadow duration-300';
+
+        item.innerHTML = `
+          <button onclick="toggleFaq(${index})" id="faq-btn-${index}" aria-expanded="false" aria-controls="faq-ans-${index}" class="w-full flex items-center justify-between p-5 text-left font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100/30 dark:hover:bg-slate-800/30 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+            <span>${faq.question}</span>
+            <i data-lucide="plus" class="w-5 h-5 text-indigo-500 dark:text-amber-400 transform transition-transform duration-300" id="faq-icon-${index}"></i>
+          </button>
+          <div id="faq-ans-${index}" role="region" aria-labelledby="faq-btn-${index}" class="accordion-grid">
+            <div class="overflow-hidden">
+              <div class="p-5 pt-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400 border-t border-slate-200/10 dark:border-slate-800/10 font-medium">
+                ${formatText(faq.answer)}
+              </div>
+            </div>
+          </div>
+        `;
+        faqList.appendChild(item);
+      });
+
+      // Recommendations
+      const recsGrid = document.getElementById('recommendations-container');
+      recsGrid.innerHTML = '';
+      RECOMMENDATIONS_DATA.forEach(rec => {
+        const card = document.createElement('div');
+        card.className = 'p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg relative flex flex-col justify-between group';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              <a href="${rec.linkedin}" target="_blank" rel="noopener" aria-label="${rec.author} on LinkedIn (opens in a new tab)" class="block w-12 h-12 rounded-xl overflow-hidden shadow-md border border-slate-200/50 dark:border-slate-800/50 bg-slate-100 dark:bg-slate-800 flex-shrink-0 ring-0 ring-indigo-500 dark:ring-amber-400 hover:ring-2 transition-all duration-300 focus-visible:ring-2 outline-none">
+                <img src="${rec.avatarImage}" alt="${rec.author}" class="w-full h-full object-cover">
+              </a>
+              <div class="min-w-0">
+                <a href="${rec.linkedin}" target="_blank" rel="noopener" class="group/name inline-flex items-center gap-1 max-w-full text-sm font-bold text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-amber-400 transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-indigo-500 rounded outline-none">
+                  <span class="truncate">${rec.author}</span>
+                  <i data-lucide="linkedin" class="w-3 h-3 flex-shrink-0 opacity-40 group-hover/name:opacity-100 transition-opacity duration-200"></i>
+                </a>
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1">${rec.title}</p>
+                <p class="text-[10px] text-indigo-600 dark:text-amber-400 font-semibold tracking-wider uppercase mt-0.5">${rec.relationship}</p>
+              </div>
+            </div>
+            <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-300 italic font-medium">
+              "${formatText(rec.text)}"
+            </p>
+          </div>
+        `;
+        recsGrid.appendChild(card);
+      });
+
+      const referencesSection = document.createElement('div');
+      referencesSection.className = 'mt-12 col-span-full';
+      referencesSection.innerHTML = `
+        <div class="mb-6">
+          <h3 class="text-xl font-bold font-display text-slate-900 dark:text-white">
+            ${REFERENCES_INTRO.heading}
+          </h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            ${REFERENCES_INTRO.description}
+          </p>
+        </div>
+
+        <div id="references-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div>
+      `;
+
+      recsGrid.appendChild(referencesSection);
+
+      const referencesGrid = document.getElementById('references-grid');
+
+      REFERENCES_DATA.forEach(ref => {
+        const card = document.createElement('a');
+
+        card.href = ref.linkedin;
+        card.target = '_blank';
+        card.rel = 'noopener';
+
+        card.className = `
+          group block p-5 rounded-2xl
+          bg-white/40 dark:bg-slate-900/40
+          border border-slate-200/50 dark:border-slate-800/50
+          backdrop-blur-xl shadow-lg
+          hover:-translate-y-0.5
+          transition-all duration-300
+        `;
+
+        card.innerHTML = `
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-xl overflow-hidden shadow-md border border-slate-200/50 dark:border-slate-800/50 bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+              <img src="${ref.avatarImage}" alt="${ref.name}" class="w-full h-full object-cover">
+            </div>
+
+            <div class="min-w-0">
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white truncate group-hover:whitespace-normal transition-all duration-300">
+                ${ref.name}
+              </h4>
+
+              <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 group-hover:line-clamp-none transition-all duration-300">
+                ${ref.title}
+              </p>
+
+              <p class="text-[10px] text-indigo-600 dark:text-amber-400 font-semibold tracking-wider uppercase mt-1">
+                ${ref.relationship}
+              </p>
+            </div>
+          </div>
+        `;
+
+        referencesGrid.appendChild(card);
+      });
+
+      // Career Trajectory timeline (reverse chronological order)
+      const timelineFlow = document.getElementById('timeline-flow');
+      timelineFlow.innerHTML = '';
+
+      TRAJECTORY_DATA.forEach((item, index) => {
+        const isOdd = index % 2 === 0;
+        const isFirst = index === 0;
+        const isLast = index === TRAJECTORY_DATA.length - 1;
+
+        const row = document.createElement('div');
+        row.id = `row-${item.id}`;
+        row.className = 'relative flex gap-4 md:gap-0 md:grid md:grid-cols-9 items-stretch group/row';
+
+        // Timeline line padding logic
+        let railClass = 'absolute top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
+        if (isFirst) railClass = 'absolute top-1/2 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
+        if (isLast) railClass = 'absolute top-0 bottom-1/2 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
+
+        let timelineItemHTML = '';
+
+        if (isOdd) {
+          // Odd: Left side card, Right spacer
+          timelineItemHTML = `
+            <div class="w-full md:col-span-4 order-2 md:order-1 flex flex-col justify-center items-stretch md:items-end">
+              ${generateCardMarkup(item)}
+            </div>
+
+            <div class="flex items-center justify-center relative md:col-span-1 order-1 md:order-2 w-8 md:w-auto flex-shrink-0">
+              <div class="${railClass}"></div>
+              <button onclick="toggleTimelineCard('${item.id}')" aria-label="Toggle details for ${item.company}" class="absolute w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-350 dark:border-slate-700 flex items-center justify-center z-10 transition-all duration-300 transform group-hover/row:scale-110 timeline-dot-node" id="dot-${item.id}" style="--node-brand-color: #6366f1;">
+                <span class="w-3.5 h-3.5 rounded-full transition-transform duration-300 transform scale-75 timeline-dot-center" style="background-color: var(--node-brand-color);"></span>
+              </button>
+            </div>
+
+            <div class="hidden md:block md:col-span-4 order-3"></div>
+          `;
+        } else {
+          // Even: Left spacer, Right side card
+          timelineItemHTML = `
+            <div class="hidden md:block md:col-span-4 order-1"></div>
+
+            <div class="flex items-center justify-center relative md:col-span-1 order-2 w-8 md:w-auto flex-shrink-0">
+              <div class="${railClass}"></div>
+              <button onclick="toggleTimelineCard('${item.id}')" aria-label="Toggle details for ${item.company}" class="absolute w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-350 dark:border-slate-700 flex items-center justify-center z-10 transition-all duration-300 transform group-hover/row:scale-110 timeline-dot-node" id="dot-${item.id}" style="--node-brand-color: #6366f1;">
+                <span class="w-3.5 h-3.5 rounded-full transition-transform duration-300 transform scale-75 timeline-dot-center" style="background-color: var(--node-brand-color);"></span>
+              </button>
+            </div>
+
+            <div class="w-full md:col-span-4 order-3 flex flex-col justify-center items-stretch md:items-start">
+              ${generateCardMarkup(item)}
+            </div>
+          `;
+        }
+
+        row.innerHTML = timelineItemHTML;
+        timelineFlow.appendChild(row);
+      });
+
+      // Setup dynamic brand colors
+      updateDynamicBrandStyles();
+    }
+
+    // Timeline card compiler
+    function generateCardMarkup(item) {
+      let typeIcon = 'briefcase';
+      if (item.type === 'education') typeIcon = 'graduation-cap';
+      if (item.type === 'internship') typeIcon = 'award';
+
+      // Company link (opens in a new tab). stopPropagation so it doesn't toggle the card accordion.
+      const hasLink = !!item.link;
+      const linkAttrs = hasLink
+        ? `href="${item.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Visit ${item.company} (opens in a new tab)"`
+        : '';
+
+      // Determine logo rendering
+      const logoInner = item.logo ? `<img src="${item.logo}" alt="${item.company} logo" class="w-full h-full object-cover">` : '';
+      const logoHTML = item.logo
+        ? (hasLink
+            ? `<a ${linkAttrs} class="group/logo block flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-sm ring-0 ring-[var(--brand-color)] hover:ring-2 hover:border-[var(--brand-color)] transition-all duration-300 focus-visible:ring-2 outline-none">${logoInner}</a>`
+            : `<div class="flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-sm">${logoInner}</div>`)
+        : '';
+
+      // Company name: linked variant gets a dashed underline on hover + a small external-link glyph.
+      const companyHTML = hasLink
+        ? `<a ${linkAttrs} class="group/company inline-flex items-center gap-1 font-bold text-slate-850 dark:text-slate-200 hover:text-[var(--brand-color)] transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-[var(--brand-color)] rounded outline-none">
+            <span class="border-b border-dashed border-slate-300/60 dark:border-slate-600/60 group-hover/company:border-[var(--brand-color)] transition-colors duration-200">${item.company}</span>
+            <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-40 group-hover/company:opacity-100 transition-opacity duration-200"></i>
+          </a>`
+        : `<span class="font-bold text-slate-850 dark:text-slate-200">${item.company}</span>`;
+
+      // Standard single-role timeline card
+      return `
+        <div id="card-${item.id}" onclick="event.stopPropagation(); toggleTimelineCard('${item.id}')" class="w-full text-left bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 hover:border-[var(--brand-color)] hover:shadow-lg backdrop-blur-xl rounded-2xl shadow-sm transition-all duration-300 cursor-pointer overflow-hidden relative group/card border-l-[3.5px] border-l-[var(--brand-color)]">
+          <div class="p-5">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold tracking-wider uppercase bg-[var(--brand-bg)] text-[var(--brand-color)] border border-[var(--brand-bg-border)]">
+                <i data-lucide="${typeIcon}" class="w-2.5 h-2.5"></i> ${item.type}
+              </span>
+
+              <span class="text-[10px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/85 px-2.5 py-1 rounded-md border border-slate-200/50 dark:border-slate-700/50 shadow-sm tracking-wide">
+                ${item.period}
+              </span>
+
+              <button onclick="event.stopPropagation(); toggleTimelineCard('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-extrabold tracking-wider uppercase transition-all duration-300 bg-[var(--brand-bg)] text-[var(--brand-color)] border border-[var(--brand-bg-border)] hover:bg-[var(--brand-color)] hover:text-white dark:hover:text-slate-950 focus:outline-none" id="btn-toggle-${item.id}">
+                <span id="btn-text-${item.id}">Details</span>
+                <i data-lucide="chevron-down" class="w-3.5 h-3.5 transform transition-transform duration-300" id="chevron-${item.id}"></i>
+              </button>
+            </div>
+            <div class="flex items-center gap-4 min-w-0">
+              ${logoHTML}
+              <div class="min-w-0">
+                <h3 class="text-lg font-bold font-display text-slate-900 dark:text-white leading-tight group-hover/card:text-[var(--brand-color)] transition-colors duration-200">
+                  ${item.role}
+                </h3>
+                <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                  ${companyHTML}
+                  <span class="text-slate-400">•</span>
+                  <span class="flex items-center gap-0.5">${item.flag} ${item.location}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="content-grid-${item.id}" class="accordion-grid">
+            <div class="overflow-hidden">
+              <div class="px-5 pb-5 pt-3 border-t border-slate-200/30 dark:border-slate-800/30 text-sm font-medium leading-relaxed text-slate-600 dark:text-slate-300 space-y-4">
+                <p>${formatText(item.description)}</p>
+
+                ${item.score ? `
+                  <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/5 dark:bg-amber-400/5 border border-indigo-500/10 dark:border-amber-400/10 text-xs font-bold">
+                    <span class="text-slate-500">Academic Score:</span>
+                    <span class="text-indigo-600 dark:text-amber-400 font-extrabold">${item.score}</span>
+                  </div>
+                ` : ''}
+
+                ${item.highlights && item.highlights.length > 0 ? `
+                  <ul class="space-y-2.5">
+                    ${item.highlights.map(hl => `
+                      <li class="flex items-start gap-2.5">
+                        <span class="mt-1.5 w-1.2 h-1.2 rounded-full bg-[var(--brand-color)] flex-shrink-0"></span>
+                        <span class="flex-1">${formatText(hl)}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                ` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Dynamic brand colors loader
+    function updateDynamicBrandStyles() {
+      const isDark = document.documentElement.classList.contains('dark');
+      TRAJECTORY_DATA.forEach(item => {
+        const card = document.getElementById(`card-${item.id}`);
+        const dotNode = document.getElementById(`dot-${item.id}`);
+
+        if (card && dotNode) {
+          const color = isDark ? item.colors.dark : item.colors.light;
+
+          card.style.setProperty('--brand-color', color);
+          card.style.setProperty('--brand-bg', color + '12'); // 7% opacity
+          card.style.setProperty('--brand-bg-border', color + '22'); // 13% opacity
+
+          dotNode.style.setProperty('--node-brand-color', color);
+        }
+      });
+    }
+
+    // Toggle FAQ dropdown
+    function toggleFaq(index) {
+      const ansGrid = document.getElementById(`faq-ans-${index}`);
+      const btn = document.getElementById(`faq-btn-${index}`);
+      const icon = document.getElementById(`faq-icon-${index}`);
+
+      const isOpen = ansGrid.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+      if (isOpen) {
+        icon.classList.add('rotate-45');
+        icon.style.color = '#e11d48';
+      } else {
+        icon.classList.remove('rotate-45');
+        icon.style.color = '';
+      }
+    }
+
+    // Timeline card expander
+    function toggleTimelineCard(cardId) {
+      const targetItem = TRAJECTORY_DATA.find(c => c.id === cardId);
+      if (!targetItem) return;
+
+      const grid = document.getElementById(`content-grid-${cardId}`);
+      const chevron = document.getElementById(`chevron-${cardId}`);
+      const card = document.getElementById(`card-${cardId}`);
+      const dot = document.getElementById(`dot-${cardId}`);
+      const btnText = document.getElementById(`btn-text-${cardId}`);
+
+      if (!grid) return;
+
+      const isCurrentlyOpen = grid.classList.contains('open');
+      const shouldOpen = !isCurrentlyOpen;
+
+      // Close other cards for clean visualization
+      if (shouldOpen) {
+        TRAJECTORY_DATA.forEach(item => {
+          if (item.id !== cardId) {
+            const otherGrid = document.getElementById(`content-grid-${item.id}`);
+            const otherChevron = document.getElementById(`chevron-${item.id}`);
+            const otherCard = document.getElementById(`card-${item.id}`);
+            const otherDot = document.getElementById(`dot-${item.id}`);
+            const otherBtnText = document.getElementById(`btn-text-${item.id}`);
+
+            if (otherGrid && otherGrid.classList.contains('open')) {
+              otherGrid.classList.remove('open');
+              if (otherChevron) otherChevron.classList.remove('rotate-180');
+              if (otherBtnText) otherBtnText.textContent = 'Details';
+              if (otherCard) {
+                otherCard.classList.remove('ring-2', 'ring-[var(--brand-color)]/30', 'bg-white/70', 'dark:bg-slate-900/70', 'scale-[1.01]');
+                otherCard.classList.add('bg-white/40', 'dark:bg-slate-900/40');
+              }
+              if (otherDot) {
+                otherDot.classList.remove('scale-125', 'ring-4', 'ring-[var(--node-brand-color)]/30');
+                otherDot.querySelector('.timeline-dot-center').classList.remove('scale-110');
+                otherDot.querySelector('.timeline-dot-center').classList.add('scale-75');
+              }
+            }
+          }
+        });
+      }
+
+      // Update targeted card states
+      if (shouldOpen) {
+        grid.classList.add('open');
+        if (chevron) chevron.classList.add('rotate-180');
+        if (btnText) btnText.textContent = 'Collapse';
+        if (card) {
+          card.classList.add('ring-2', 'ring-[var(--brand-color)]/30', 'bg-white/70', 'dark:bg-slate-900/70', 'scale-[1.01]');
+          card.classList.remove('bg-white/40', 'dark:bg-slate-900/40');
+        }
+        if (dot) {
+          dot.classList.add('scale-125', 'ring-4', 'ring-[var(--node-brand-color)]/30');
+          dot.querySelector('.timeline-dot-center').classList.remove('scale-75');
+          dot.querySelector('.timeline-dot-center').classList.add('scale-110');
+        }
+      } else {
+        grid.classList.remove('open');
+        if (chevron) chevron.classList.remove('rotate-180');
+        if (btnText) btnText.textContent = 'Details';
+        if (card) {
+          card.classList.remove('ring-2', 'ring-[var(--brand-color)]/30', 'bg-white/70', 'dark:bg-slate-900/70', 'scale-[1.01]');
+          card.classList.add('bg-white/40', 'dark:bg-slate-900/40');
+        }
+        if (dot) {
+          dot.classList.remove('scale-125', 'ring-4', 'ring-[var(--node-brand-color)]/30');
+          dot.querySelector('.timeline-dot-center').classList.remove('scale-110');
+          dot.querySelector('.timeline-dot-center').classList.add('scale-75');
+        }
+      }
+    }
+  </script>
+</body>
+</html>
