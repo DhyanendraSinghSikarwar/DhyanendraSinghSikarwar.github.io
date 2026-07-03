@@ -9,7 +9,7 @@ const TRAJECTORY_DATA = [
     period: "Sep 2025 - Present",
     type: "work",
     colors: { light: "#003B71", dark: "#4A90D9" },
-    logo: "https://logo.clearbit.com/isb.edu",
+    logo: "https://upload.wikimedia.org/wikipedia/en/b/b2/Indian_School_of_Business_logo.svg",
     link: "https://www.isb.edu/",
     description: "Joined ISB's analytics function, contributing to ^data-driven decision-making^ and institutional analytics. Working alongside one of India's top business school communities.",
     highlights: []
