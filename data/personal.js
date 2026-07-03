@@ -1,7 +1,7 @@
 // Personal and Contact Details
 const PERSONAL_DATA = {
   name: "Dhyanendra Singh",
-  title: "Data Scientist | ML Engineer | ISB",
+  title: "Data Scientist | ML/DL/GenAI Engineer | ISB",
   profileImage: "assets/profile.jpg",
   contacts: [
     { type: "phone",    label: "+91 8054276810",                        href: "tel:+918054276810",                                       icon: "phone" },

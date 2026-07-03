@@ -2,7 +2,7 @@
 const TRAJECTORY_DATA = [
   {
     id: "isb",
-    role: "Data Analyst",   // Update this if your ISB role title is different
+    role: "Data Scientist",   // ← Update this title if your ISB role has a different name
     company: "Indian School of Business",
     location: "Hyderabad, India",
     flag: "🇮🇳",
