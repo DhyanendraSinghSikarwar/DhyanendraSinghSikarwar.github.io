@@ -2,7 +2,7 @@
 const TRAJECTORY_DATA = [
   {
     id: "isb",
-    role: "Data Analyst",   // ← Update this title if your ISB role has a different name
+    role: "Data Analyst",   // Update this if your ISB role title is different
     company: "Indian School of Business",
     location: "Hyderabad, India",
     flag: "🇮🇳",
@@ -55,7 +55,7 @@ const TRAJECTORY_DATA = [
   },
   {
     id: "manit",
-    role: "Master of Technology (M.Tech)",
+    role: "M.Tech, Industrial Design",
     company: "Maulana Azad National Institute of Technology",
     location: "Bhopal, India",
     flag: "🇮🇳",
@@ -64,12 +64,12 @@ const TRAJECTORY_DATA = [
     colors: { light: "#B91C1C", dark: "#F87171" },
     logo: "https://logo.clearbit.com/manit.ac.in",
     link: "https://www.manit.ac.in/",
-    description: "Master of Technology from one of India's premier National Institutes of Technology. Qualified `GATE 2017` with *AIR 3423* (score 65.29/100) for admission.",
+    description: "Master of Technology in ^Industrial Design^ from one of India's premier National Institutes of Technology. Qualified `GATE 2017` with *AIR 3423* (score 65.29/100) for admission.",
     score: "GATE AIR 3423"
   },
   {
     id: "lpu",
-    role: "Bachelor of Technology (B.Tech)",
+    role: "B.Tech, Mechanical Engineering",
     company: "Lovely Professional University",
     location: "Jalandhar, India",
     flag: "🇮🇳",
@@ -78,6 +78,6 @@ const TRAJECTORY_DATA = [
     colors: { light: "#D97706", dark: "#FBBF24" },
     logo: "https://logo.clearbit.com/lpu.in",
     link: "https://www.lpu.in/",
-    description: "Bachelor of Technology, building strong foundations in computer science, programming, and engineering problem-solving."
+    description: "Bachelor of Technology in ^Mechanical Engineering^, building strong analytical and problem-solving foundations."
   }
 ];

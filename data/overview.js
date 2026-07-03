@@ -6,7 +6,7 @@ const OVERVIEW_DATA = {
   // from TRAJECTORY_DATA (current role + summed work duration) and are prepended at render time.
   quickFacts: [
     { label: "Core Expertise",   value: "Data Science & Machine Learning" },
-    { label: "Education",        value: "M.Tech, MANIT Bhopal" },
+    { label: "Education",        value: "M.Tech Industrial Design, MANIT" },
     { label: "GATE 2017",        value: "AIR 3423 · Score 65.29/100" },
     { label: "Role Base",        value: "Indore, MP, India" }
   ],
