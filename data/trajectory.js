@@ -2,7 +2,7 @@
 const TRAJECTORY_DATA = [
   {
     id: "isb",
-    role: "Data Analyst",   // ← Update this title if your ISB role has a different name
+    role: "Data Scientist",   // ← Update this title if your ISB role has a different name
     company: "Indian School of Business",
     location: "Hyderabad, India",
     flag: "🇮🇳",
@@ -78,6 +78,6 @@ const TRAJECTORY_DATA = [
     colors: { light: "#D97706", dark: "#FBBF24" },
     logo: "https://logo.clearbit.com/lpu.in",
     link: "https://www.lpu.in/",
-    description: "Bachelor of Technology, building strong foundations in computer science, programming, and engineering problem-solving."
+    description: "Bachelor of Technology, building strong foundations in Mechanics, programming, and engineering problem-solving."
   }
 ];
