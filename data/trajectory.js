@@ -9,7 +9,7 @@ const TRAJECTORY_DATA = [
     period: "Sep 2025 - Present",
     type: "work",
     colors: { light: "#003B71", dark: "#4A90D9" },
-    logo: "https://upload.wikimedia.org/wikipedia/en/b/b2/Indian_School_of_Business_logo.svg",
+    logo: "assets/isb.svg",
     link: "https://www.isb.edu/",
     description: "Joined ISB's analytics function, contributing to ^data-driven decision-making^ and institutional analytics. Working alongside one of India's top business school communities.",
     highlights: []
@@ -23,7 +23,7 @@ const TRAJECTORY_DATA = [
     period: "Jan 2023 - Aug 2025",
     type: "work",
     colors: { light: "#7C3AED", dark: "#A78BFA" },
-    logo: "",
+    logo: "assets/codenote.svg",
     link: "",
     description: "Worked on European financial market data to determine ^Kreditz scores^ for loan eligibility across Sweden, Finland, Norway, and UK. Focused on code optimization, ML model development, and scalable API design.",
     highlights: [
@@ -44,7 +44,7 @@ const TRAJECTORY_DATA = [
     period: "Jan 2022 - Dec 2022",
     type: "work",
     colors: { light: "#0284C7", dark: "#38BDF8" },
-    logo: "",
+    logo: "assets/netlink.svg",
     link: "",
     description: "Supported business intelligence operations through dashboard reporting, data quality management, and database access administration.",
     highlights: [
@@ -62,7 +62,7 @@ const TRAJECTORY_DATA = [
     period: "Aug 2018 - Nov 2020",
     type: "education",
     colors: { light: "#B91C1C", dark: "#F87171" },
-    logo: "https://logo.clearbit.com/manit.ac.in",
+    logo: "assets/manit.svg",
     link: "https://www.manit.ac.in/",
     description: "Master of Technology in ^Industrial Design^ from one of India's premier National Institutes of Technology. Qualified `GATE 2017` with *AIR 3423* (score 65.29/100) for admission.",
     score: "GATE AIR 3423"
@@ -76,7 +76,7 @@ const TRAJECTORY_DATA = [
     period: "Aug 2011 - Nov 2015",
     type: "education",
     colors: { light: "#D97706", dark: "#FBBF24" },
-    logo: "https://logo.clearbit.com/lpu.in",
+    logo: "assets/lpu.svg",
     link: "https://www.lpu.in/",
     description: "Bachelor of Technology in ^Mechanical Engineering^, building strong analytical and problem-solving foundations."
   }

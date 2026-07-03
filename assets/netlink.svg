@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" rx="8" fill="#0284C7"/>
+  <!-- Network nodes -->
+  <circle cx="60" cy="40" r="8" fill="white" opacity="0.9"/>
+  <circle cx="100" cy="22" r="8" fill="white" opacity="0.9"/>
+  <circle cx="140" cy="40" r="8" fill="white" opacity="0.9"/>
+  <circle cx="100" cy="58" r="8" fill="white" opacity="0.9"/>
+  <line x1="60" y1="40" x2="100" y2="22" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="22" x2="140" y2="40" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="140" y1="40" x2="100" y2="58" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="58" x2="60" y2="40" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="60" y1="40" x2="140" y2="40" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <line x1="100" y1="22" x2="100" y2="58" stroke="white" stroke-width="1.5" opacity="0.4"/>
+</svg>

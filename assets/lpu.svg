@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80">
+  <rect width="200" height="80" rx="8" fill="#92400E"/>
+  <!-- Shield shape -->
+  <path d="M100,10 L130,22 L130,48 Q100,65 100,65 Q70,65 70,48 L70,22 Z" fill="#FBBF24" opacity="0.9"/>
+  <path d="M100,18 L124,28 L124,47 Q100,60 100,60 Q76,60 76,47 L76,28 Z" fill="#92400E"/>
+  <text x="100" y="45" font-family="Georgia, serif" font-size="14" font-weight="bold" fill="#FBBF24" text-anchor="middle">LPU</text>
+  <text x="100" y="73" font-family="Arial, sans-serif" font-size="9" fill="#FBBF24" text-anchor="middle" letter-spacing="1">LOVELY PROFESSIONAL UNIV.</text>
+</svg>
