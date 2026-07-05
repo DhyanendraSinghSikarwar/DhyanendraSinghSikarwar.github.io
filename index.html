@@ -248,10 +248,9 @@
           </div>
 
           <!-- Download résumé (PDF) — subtle, beta -->
-          <button onclick="downloadResume()" aria-label="Download résumé as PDF (beta)" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
+          <button onclick="downloadResume()" aria-label="Download résumé as PDF" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span>Résumé (PDF)</span>
-            <span class="text-[8px] font-bold uppercase tracking-wider opacity-70">Beta</span>
           </button>
         </div>
 
@@ -454,19 +453,154 @@
       updateDynamicBrandStyles();
     }
 
-    // Download résumé as PDF (Beta) via the browser's print -> Save as PDF.
-    // Forces light mode for the printout (regardless of on-screen theme), then restores it.
+    // Download résumé as PDF — opens a clean single-column résumé in a new window
+    // matching the Arani Das layout: compact header, plain-text competencies, flat career entries.
     function downloadResume() {
-      const wasDark = document.documentElement.classList.contains('dark');
-      if (wasDark) {
-        document.documentElement.classList.remove('dark');
-        const restore = () => {
-          document.documentElement.classList.add('dark');
-          window.removeEventListener('afterprint', restore);
-        };
-        window.addEventListener('afterprint', restore);
+      // Base URL so relative asset paths (logos, profile photo) resolve correctly
+      const base = (window.location.href.replace(/\?.*$/, '').replace(/\/[^\/]*$/, '') + '/').replace(/\/\/$/, '/');
+
+      function assetURL(path) {
+        if (!path) return '';
+        return /^https?:/.test(path) ? path : base + path;
       }
-      window.print();
+
+      // Strip / simplify inline markers for print
+      // *num* → <b>num</b>  ^skill^ → <b>skill</b>  `sw` → <b>sw</b>
+      function fmt(str) {
+        if (!str) return '';
+        return String(str)
+          .replace(/`([^`]+)`/g, '<b>$1</b>')
+          .replace(/\^([^^]+)\^/g, '<b>$1</b>')
+          .replace(/\*([^*]+)\*/g, '<b>$1</b>');
+      }
+
+      // Header meta line: Experience + Base
+      const exp = computeExperience();
+      const baseFactObj = (OVERVIEW_DATA.quickFacts || []).find(f => f.label === 'Role Base');
+      const baseCity = baseFactObj ? baseFactObj.value : '';
+      const contactLine = PERSONAL_DATA.contacts.map(c => c.label).join(' · ');
+
+      // Logo img tag (inline, small)
+      function logoTag(item) {
+        if (!item.logo) return '';
+        return `<img src="${assetURL(item.logo)}" alt="${item.company}" style="width:14px;height:14px;object-fit:contain;object-position:center;vertical-align:middle;margin-right:5px;border-radius:2px;display:inline;">`;
+      }
+
+      // One career / education entry
+      function entryHTML(item) {
+        const cityPart = item.location ? item.location.split(',')[0].trim() : '';
+        const cityLabel = cityPart ? `, ${cityPart}` : '';
+        const companyLinked = item.link
+          ? `<a href="${item.link}" style="color:inherit;text-decoration:none;">${item.company}${cityLabel}</a>`
+          : `${item.company}${cityLabel}`;
+
+        const desc = item.description
+          ? `<p style="margin:3px 0 0;font-size:9pt;line-height:1.6;">${fmt(item.description)}</p>` : '';
+
+        const bulletList = (item.highlights || []).length > 0
+          ? `<ul style="margin:4px 0 0 16px;padding:0;">` +
+            item.highlights.map(h =>
+              `<li style="font-size:9pt;line-height:1.6;margin-bottom:2px;">${fmt(h)}</li>`
+            ).join('') +
+            `</ul>` : '';
+
+        const scoreTag = item.score
+          ? `<p style="margin:4px 0 0;font-size:9pt;"><b>Academic Score: ${item.score}</b></p>` : '';
+
+        return `
+          <div style="margin-bottom:13px;break-inside:avoid;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
+              <span style="font-size:10pt;font-weight:700;line-height:1.4;">
+                ${logoTag(item)}<span>${companyLinked}</span>
+                <span style="font-weight:400;color:#334155;"> — ${item.role}</span>
+              </span>
+              <span style="font-size:9pt;color:#475569;white-space:nowrap;flex-shrink:0;">${item.period}</span>
+            </div>
+            ${desc}${bulletList}${scoreTag}
+          </div>`;
+      }
+
+      const workItems = TRAJECTORY_DATA.filter(e => e.type === 'work');
+      const eduItems  = TRAJECTORY_DATA.filter(e => e.type === 'education');
+
+      const competenciesHTML = (OVERVIEW_DATA.competencies || []).map(c =>
+        `<p style="font-size:9.5pt;line-height:1.6;margin:0 0 5px 0;"><b>${c.title}</b> — ${fmt(c.description)}</p>`
+      ).join('');
+
+      const imgSrc = assetURL(PERSONAL_DATA.profileImage);
+
+      const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>${PERSONAL_DATA.name} - ${PERSONAL_DATA.title}</title>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    color: #0f172a;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @page { margin: 14mm 18mm; }
+  h2 {
+    font-size: 11.5pt;
+    font-weight: 800;
+    border-bottom: 1.5px solid #0f172a;
+    padding-bottom: 3px;
+    margin: 15px 0 8px 0;
+  }
+  b { color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style-type: disc; }
+  * { box-sizing: border-box; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div style="display:flex;align-items:flex-start;gap:14px;padding-bottom:12px;border-bottom:2px solid #0f172a;margin-bottom:15px;">
+  <img src="${imgSrc}" alt="${PERSONAL_DATA.name}"
+       style="width:68px;height:68px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;">
+  <div style="flex:1;min-width:0;">
+    <div style="font-size:22pt;font-weight:900;line-height:1.1;margin-bottom:2px;">${PERSONAL_DATA.name}</div>
+    <div style="font-size:10.5pt;font-weight:700;color:#4338ca;margin-bottom:4px;">${PERSONAL_DATA.title}</div>
+    <div style="font-size:8.5pt;color:#374151;margin-bottom:2px;">${contactLine}</div>
+    <div style="font-size:8.5pt;"><b>Experience:</b> ${exp}${baseCity ? ' · <b>Base:</b> ' + baseCity : ''}</div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<h2>Summary</h2>
+<p style="font-size:9.5pt;line-height:1.65;margin:0;">${fmt(OVERVIEW_DATA.bio)}</p>
+
+<!-- CORE COMPETENCIES -->
+<h2>Core Competencies</h2>
+${competenciesHTML}
+
+<!-- CAREER TRAJECTORY -->
+<h2>Career Trajectory</h2>
+${workItems.map(entryHTML).join('')}
+
+<!-- EDUCATION -->
+<h2>Education</h2>
+${eduItems.map(entryHTML).join('')}
+
+</body>
+</html>`;
+
+      const win = window.open('', '_blank', 'width=900,height=700');
+      if (!win) {
+        alert('Please allow pop-ups for this site to download the résumé.');
+        return;
+      }
+      win.document.open();
+      win.document.write(html);
+      win.document.close();
+      win.focus();
+      // Short delay so images load before print dialog opens
+      setTimeout(() => { win.print(); }, 900);
     }
 
     // Nav pane controller
