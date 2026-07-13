@@ -6,23 +6,23 @@
   <!-- Monogram favicon. Static fallback below; upgraded by JS to a gradient mark using the profile's initials. -->
   <link rel="icon" id="favicon" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Crect%20width%3D'100'%20height%3D'100'%20rx%3D'24'%20fill%3D'%234f46e5'%2F%3E%3Ctext%20x%3D'50'%20y%3D'66'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'700'%20font-size%3D'46'%20fill%3D'white'%3EDS%3C%2Ftext%3E%3C%2Fsvg%3E">
   <title>Dhyanendra Singh - Data Scientist & ML Engineer</title>
-
+  
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Professional profile of Dhyanendra Singh, a Data Scientist and ML Engineer with 4+ years of experience in machine learning, data pipelines, and full-stack development.">
-  <meta name="keywords" content="Dhyanendra Singh, Data Scientist, Machine Learning Engineer, Python, Django, NIT Bhopal, Data Science, ML, Full Stack Developer">
+  <meta name="description" content="Professional profile of Dhyanendra Singh, a Data Scientist and ML Engineer with 4+ years of experience in machine learning, data pipelines, and scalable API development.">
+  <meta name="keywords" content="Dhyanendra Singh, Data Scientist, Machine Learning Engineer, Python, Django, NIT Bhopal, Data Science, ML, GenAI, ISB">
   <meta name="color-scheme" content="dark light">
-
+  
   <!-- Preconnect to Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
+  
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
-
+  
   <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
@@ -47,7 +47,7 @@
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
-
+    
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
@@ -78,12 +78,12 @@
     /* Mesh Grid Background */
     .bg-grid-pattern {
       background-size: 40px 40px;
-      background-image:
+      background-image: 
         linear-gradient(to right, rgba(148, 163, 184, 0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
     }
     .dark .bg-grid-pattern {
-      background-image:
+      background-image: 
         linear-gradient(to right, rgba(51, 65, 85, 0.12) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(51, 65, 85, 0.12) 1px, transparent 1px);
     }
@@ -206,7 +206,7 @@
       img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   </style>
-
+  
   <!-- Load Sectioned Config Data -->
   <script src="data/personal.js"></script>
   <script src="data/overview.js"></script>
@@ -248,9 +248,10 @@
           </div>
 
           <!-- Download résumé (PDF) — subtle, beta -->
-          <button onclick="downloadResume()" aria-label="Download résumé as PDF" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
+          <button onclick="downloadResume()" aria-label="Download résumé as PDF (beta)" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span>Résumé (PDF)</span>
+            <span class="text-[8px] font-bold uppercase tracking-wider opacity-70">Beta</span>
           </button>
         </div>
 
@@ -322,28 +323,28 @@
       <!-- SECTION: OVERVIEW -->
       <section id="sec-overview" class="section-pane">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-
+          
           <!-- Bio & Global Footprint Panel -->
           <div class="md:col-span-2 space-y-6">
             <p id="overview-bio" class="text-lg leading-relaxed text-slate-600 dark:text-slate-300 font-medium"></p>
-
+            
             <!-- Geographic / Global Footprint Widget (heading + visibility set by JS) -->
             <div id="footprint-widget" class="p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg">
               <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-amber-400 mb-3 flex items-center gap-2">
                 <i data-lucide="globe" class="w-4 h-4"></i> <span id="footprint-heading">Global Footprint</span>
               </h3>
               <p id="global-footprint-text" class="text-sm font-medium text-slate-500 dark:text-slate-400 mb-4"></p>
-
+              
               <div class="flex flex-wrap gap-2.5" id="overview-countries"></div>
             </div>
           </div>
-
+          
           <!-- Quick Facts Sidepanel -->
           <div class="rounded-3xl bg-gradient-to-b from-indigo-500/5 to-purple-500/5 dark:from-indigo-950/10 dark:to-purple-950/10 border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-6">
             <h3 class="text-lg font-bold font-display text-slate-900 dark:text-white flex items-center gap-2">
               <i data-lucide="briefcase" class="w-5 h-5 text-indigo-500"></i> Executive Profile
             </h3>
-
+            
             <div id="quick-facts" class="text-sm font-medium"></div>
           </div>
         </div>
@@ -427,7 +428,7 @@
     function initTheme() {
       const savedTheme = localStorage.getItem('theme');
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
+      
       if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
         document.documentElement.classList.add('dark');
         themeSun.classList.remove('hidden');
@@ -440,7 +441,7 @@
     function toggleTheme() {
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
+      
       if (isDark) {
         themeSun.classList.remove('hidden');
         themeMoon.classList.add('hidden');
@@ -448,24 +449,18 @@
         themeSun.classList.add('hidden');
         themeMoon.classList.remove('hidden');
       }
-
+      
       // Update dynamic brand colors according to theme
       updateDynamicBrandStyles();
     }
 
-    // Download résumé as PDF — opens a clean single-column résumé in a new window
-    // matching the Arani Das layout: compact header, plain-text competencies, flat career entries.
+    // Download résumé as PDF — opens a clean single-column résumé matching Arani's layout.
     function downloadResume() {
-      // Base URL so relative asset paths (logos, profile photo) resolve correctly
       const base = (window.location.href.replace(/\?.*$/, '').replace(/\/[^\/]*$/, '') + '/').replace(/\/\/$/, '/');
-
       function assetURL(path) {
         if (!path) return '';
         return /^https?:/.test(path) ? path : base + path;
       }
-
-      // Strip / simplify inline markers for print
-      // *num* → <b>num</b>  ^skill^ → <b>skill</b>  `sw` → <b>sw</b>
       function fmt(str) {
         if (!str) return '';
         return String(str)
@@ -473,96 +468,53 @@
           .replace(/\^([^^]+)\^/g, '<b>$1</b>')
           .replace(/\*([^*]+)\*/g, '<b>$1</b>');
       }
-
-      // Header meta line: Experience + Base
       const exp = computeExperience();
       const baseFactObj = (OVERVIEW_DATA.quickFacts || []).find(f => f.label === 'Role Base');
       const baseCity = baseFactObj ? baseFactObj.value : '';
       const contactLine = PERSONAL_DATA.contacts.map(c => c.label).join(' · ');
-
-      // Logo img tag (inline, small)
       function logoTag(item) {
         if (!item.logo) return '';
-        return `<img src="${assetURL(item.logo)}" alt="${item.company}" style="width:14px;height:14px;object-fit:contain;object-position:center;vertical-align:middle;margin-right:5px;border-radius:2px;display:inline;">`;
+        return `<img src="${assetURL(item.logo)}" alt="${item.company}" style="width:14px;height:14px;object-fit:contain;vertical-align:middle;margin-right:5px;border-radius:2px;display:inline;">`;
       }
-
-      // One career / education entry
+      function subEntryHTML(subRole) {
+        const desc = subRole.description ? `<p style="margin:3px 0 0;font-size:9pt;line-height:1.6;">${fmt(subRole.description)}</p>` : '';
+        const bulletList = (subRole.highlights || []).length > 0
+          ? `<ul style="margin:4px 0 0 16px;padding:0;">${subRole.highlights.map(h=>`<li style="font-size:9pt;line-height:1.6;margin-bottom:2px;">${fmt(h)}</li>`).join('')}</ul>` : '';
+        return `<div style="margin-bottom:8px;"><div style="font-size:9.5pt;font-weight:700;">${subRole.role} <span style="font-weight:400;color:#475569;font-size:9pt;">${subRole.period}</span></div>${desc}${bulletList}</div>`;
+      }
       function entryHTML(item) {
         const cityPart = item.location ? item.location.split(',')[0].trim() : '';
         const cityLabel = cityPart ? `, ${cityPart}` : '';
         const companyLinked = item.link
           ? `<a href="${item.link}" style="color:inherit;text-decoration:none;">${item.company}${cityLabel}</a>`
           : `${item.company}${cityLabel}`;
-
-        const desc = item.description
-          ? `<p style="margin:3px 0 0;font-size:9pt;line-height:1.6;">${fmt(item.description)}</p>` : '';
-
-        const bulletList = (item.highlights || []).length > 0
-          ? `<ul style="margin:4px 0 0 16px;padding:0;">` +
-            item.highlights.map(h =>
-              `<li style="font-size:9pt;line-height:1.6;margin-bottom:2px;">${fmt(h)}</li>`
-            ).join('') +
-            `</ul>` : '';
-
-        const scoreTag = item.score
-          ? `<p style="margin:4px 0 0;font-size:9pt;"><b>Academic Score: ${item.score}</b></p>` : '';
-
-        return `
-          <div style="margin-bottom:13px;break-inside:avoid;">
-            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
-              <span style="font-size:10pt;font-weight:700;line-height:1.4;">
-                ${logoTag(item)}<span>${companyLinked}</span>
-                <span style="font-weight:400;color:#334155;"> — ${item.role}</span>
-              </span>
-              <span style="font-size:9pt;color:#475569;white-space:nowrap;flex-shrink:0;">${item.period}</span>
-            </div>
-            ${desc}${bulletList}${scoreTag}
-          </div>`;
+        const rolesHTML = item.isMerged && item.roles
+          ? item.roles.map(subEntryHTML).join('')
+          : (() => {
+              const desc = item.description ? `<p style="margin:3px 0 0;font-size:9pt;line-height:1.6;">${fmt(item.description)}</p>` : '';
+              const bullets = (item.highlights||[]).length>0
+                ? `<ul style="margin:4px 0 0 16px;padding:0;">${item.highlights.map(h=>`<li style="font-size:9pt;line-height:1.6;margin-bottom:2px;">${fmt(h)}</li>`).join('')}</ul>` : '';
+              const score = item.score ? `<p style="margin:4px 0 0;font-size:9pt;"><b>Academic Score: ${item.score}</b></p>` : '';
+              return desc + bullets + score;
+            })();
+        return `<div style="margin-bottom:13px;break-inside:avoid;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
+            <span style="font-size:10pt;font-weight:700;line-height:1.4;">${logoTag(item)}${companyLinked}<span style="font-weight:400;color:#334155;"> — ${item.role}</span></span>
+            <span style="font-size:9pt;color:#475569;white-space:nowrap;flex-shrink:0;">${item.period}</span>
+          </div>${rolesHTML}</div>`;
       }
-
       const workItems = TRAJECTORY_DATA.filter(e => e.type === 'work');
-      const eduItems  = TRAJECTORY_DATA.filter(e => e.type === 'education');
-
-      const competenciesHTML = (OVERVIEW_DATA.competencies || []).map(c =>
+      const eduItems = TRAJECTORY_DATA.filter(e => e.type === 'education');
+      const imgSrc = assetURL(PERSONAL_DATA.profileImage);
+      const compsHTML = (OVERVIEW_DATA.competencies||[]).map(c=>
         `<p style="font-size:9.5pt;line-height:1.6;margin:0 0 5px 0;"><b>${c.title}</b> — ${fmt(c.description)}</p>`
       ).join('');
-
-      const imgSrc = assetURL(PERSONAL_DATA.profileImage);
-
-      const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
+      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <title>${PERSONAL_DATA.name} - ${PERSONAL_DATA.title}</title>
-<style>
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10pt;
-    color: #0f172a;
-    margin: 0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  @page { margin: 14mm 18mm; }
-  h2 {
-    font-size: 11.5pt;
-    font-weight: 800;
-    border-bottom: 1.5px solid #0f172a;
-    padding-bottom: 3px;
-    margin: 15px 0 8px 0;
-  }
-  b { color: inherit; }
-  a { color: inherit; text-decoration: none; }
-  ul { list-style-type: disc; }
-  * { box-sizing: border-box; }
-</style>
-</head>
-<body>
-
-<!-- HEADER -->
+<style>body{font-family:Arial,Helvetica,sans-serif;font-size:10pt;color:#0f172a;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;}@page{margin:14mm 18mm;}h2{font-size:11.5pt;font-weight:800;border-bottom:1.5px solid #0f172a;padding-bottom:3px;margin:15px 0 8px 0;}b{color:inherit;}a{color:inherit;text-decoration:none;}ul{list-style-type:disc;}*{box-sizing:border-box;}</style>
+</head><body>
 <div style="display:flex;align-items:flex-start;gap:14px;padding-bottom:12px;border-bottom:2px solid #0f172a;margin-bottom:15px;">
-  <img src="${imgSrc}" alt="${PERSONAL_DATA.name}"
-       style="width:68px;height:68px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;">
+  <img src="${imgSrc}" alt="${PERSONAL_DATA.name}" style="width:68px;height:68px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0;">
   <div style="flex:1;min-width:0;">
     <div style="font-size:22pt;font-weight:900;line-height:1.1;margin-bottom:2px;">${PERSONAL_DATA.name}</div>
     <div style="font-size:10.5pt;font-weight:700;color:#4338ca;margin-bottom:4px;">${PERSONAL_DATA.title}</div>
@@ -570,36 +522,15 @@
     <div style="font-size:8.5pt;"><b>Experience:</b> ${exp}${baseCity ? ' · <b>Base:</b> ' + baseCity : ''}</div>
   </div>
 </div>
-
-<!-- SUMMARY -->
 <h2>Summary</h2>
 <p style="font-size:9.5pt;line-height:1.65;margin:0;">${fmt(OVERVIEW_DATA.bio)}</p>
-
-<!-- CORE COMPETENCIES -->
-<h2>Core Competencies</h2>
-${competenciesHTML}
-
-<!-- CAREER TRAJECTORY -->
-<h2>Career Trajectory</h2>
-${workItems.map(entryHTML).join('')}
-
-<!-- EDUCATION -->
-<h2>Education</h2>
-${eduItems.map(entryHTML).join('')}
-
-</body>
-</html>`;
-
+<h2>Core Competencies</h2>${compsHTML}
+<h2>Career Trajectory</h2>${workItems.map(entryHTML).join('')}
+<h2>Education</h2>${eduItems.map(entryHTML).join('')}
+</body></html>`;
       const win = window.open('', '_blank', 'width=900,height=700');
-      if (!win) {
-        alert('Please allow pop-ups for this site to download the résumé.');
-        return;
-      }
-      win.document.open();
-      win.document.write(html);
-      win.document.close();
-      win.focus();
-      // Short delay so images load before print dialog opens
+      if (!win) { alert('Please allow pop-ups for this site to download the résumé.'); return; }
+      win.document.open(); win.document.write(html); win.document.close(); win.focus();
       setTimeout(() => { win.print(); }, 900);
     }
 
@@ -614,7 +545,7 @@ ${eduItems.map(entryHTML).join('')}
           tab.className = 'nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none';
         }
       });
-
+      
       // Hide / show section panels
       document.querySelectorAll('.section-pane').forEach(panel => {
         const id = panel.id.replace('sec-', '');
@@ -640,7 +571,7 @@ ${eduItems.map(entryHTML).join('')}
         .replace(/\*([^*]+)\*/g, '<span class="hl-num">$1</span>');
     }
 
-    // Derive up-to-two-letter initials from a name (e.g. "Dhyanendra Singh" -> "DS").
+    // Derive up-to-two-letter initials from a name (e.g. "Arani Das" -> "AD").
     function initialsFrom(name) {
       return name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
     }
@@ -750,7 +681,7 @@ ${eduItems.map(entryHTML).join('')}
       PERSONAL_DATA.contacts.forEach(contact => {
         const a = document.createElement('a');
         a.href = contact.href;
-        if (contact.type === 'linkedin' || contact.type === 'github' || contact.type === 'medium') a.target = '_blank';
+        if (['linkedin','github','medium'].includes(contact.type)) a.target = '_blank';
         a.setAttribute('aria-label', contact.label);
         a.title = contact.label;
         a.className = miniItemClass;
@@ -771,9 +702,9 @@ ${eduItems.map(entryHTML).join('')}
       PERSONAL_DATA.contacts.forEach(contact => {
         const card = document.createElement('a');
         card.href = contact.href;
-        if (contact.type === 'linkedin' || contact.type === 'github' || contact.type === 'medium') card.target = '_blank';
+        if (['linkedin','github','medium'].includes(contact.type)) card.target = '_blank';
         card.className = 'flex items-center gap-3 p-3 rounded-xl bg-white/20 dark:bg-slate-900/20 border border-slate-200/40 dark:border-slate-800/40 hover:bg-white/50 dark:hover:bg-slate-900/50 hover:border-indigo-500/40 dark:hover:border-amber-400/40 hover:shadow-md transition-all duration-300 text-slate-700 dark:text-slate-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none';
-
+        
         card.innerHTML = `
           <div class="p-2 rounded-lg bg-indigo-500/10 dark:bg-amber-400/10 text-indigo-600 dark:text-amber-400">
             <i data-lucide="${contact.icon}" class="w-4 h-4"></i>
@@ -855,14 +786,14 @@ ${eduItems.map(entryHTML).join('')}
         `;
         compGrid.appendChild(block);
       });
-
+      
       // FAQs
       const faqList = document.getElementById('faq-list');
       faqList.innerHTML = '';
       FAQS_DATA.forEach((faq, index) => {
         const item = document.createElement('div');
         item.className = 'border border-slate-200/50 dark:border-slate-800/50 bg-white/30 dark:bg-slate-900/30 backdrop-blur-md rounded-2xl overflow-hidden shadow-sm hover:shadow transition-shadow duration-300';
-
+        
         item.innerHTML = `
           <button onclick="toggleFaq(${index})" id="faq-btn-${index}" aria-expanded="false" aria-controls="faq-ans-${index}" class="w-full flex items-center justify-between p-5 text-left font-semibold text-slate-800 dark:text-slate-200 hover:bg-slate-100/30 dark:hover:bg-slate-800/30 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
             <span>${faq.question}</span>
@@ -885,7 +816,7 @@ ${eduItems.map(entryHTML).join('')}
       RECOMMENDATIONS_DATA.forEach(rec => {
         const card = document.createElement('div');
         card.className = 'p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg relative flex flex-col justify-between group';
-
+        
         card.innerHTML = `
           <div>
             <div class="flex items-center gap-4 mb-4">
@@ -972,63 +903,65 @@ ${eduItems.map(entryHTML).join('')}
       // Career Trajectory timeline (reverse chronological order)
       const timelineFlow = document.getElementById('timeline-flow');
       timelineFlow.innerHTML = '';
-
+      
       TRAJECTORY_DATA.forEach((item, index) => {
         const isOdd = index % 2 === 0;
         const isFirst = index === 0;
         const isLast = index === TRAJECTORY_DATA.length - 1;
-
+        
         const row = document.createElement('div');
         row.id = `row-${item.id}`;
         row.className = 'relative flex gap-4 md:gap-0 md:grid md:grid-cols-9 items-stretch group/row';
-
+        
         // Timeline line padding logic
         let railClass = 'absolute top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
         if (isFirst) railClass = 'absolute top-1/2 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
         if (isLast) railClass = 'absolute top-0 bottom-1/2 w-0.5 bg-slate-200 dark:bg-slate-800 transition-colors duration-300';
 
         let timelineItemHTML = '';
-
+        
         if (isOdd) {
           // Odd: Left side card, Right spacer
           timelineItemHTML = `
             <div class="w-full md:col-span-4 order-2 md:order-1 flex flex-col justify-center items-stretch md:items-end">
               ${generateCardMarkup(item)}
             </div>
-
+            
             <div class="flex items-center justify-center relative md:col-span-1 order-1 md:order-2 w-8 md:w-auto flex-shrink-0">
               <div class="${railClass}"></div>
               <button onclick="toggleTimelineCard('${item.id}')" aria-label="Toggle details for ${item.company}" class="absolute w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-350 dark:border-slate-700 flex items-center justify-center z-10 transition-all duration-300 transform group-hover/row:scale-110 timeline-dot-node" id="dot-${item.id}" style="--node-brand-color: #6366f1;">
                 <span class="w-3.5 h-3.5 rounded-full transition-transform duration-300 transform scale-75 timeline-dot-center" style="background-color: var(--node-brand-color);"></span>
               </button>
             </div>
-
+            
             <div class="hidden md:block md:col-span-4 order-3"></div>
           `;
         } else {
           // Even: Left spacer, Right side card
           timelineItemHTML = `
             <div class="hidden md:block md:col-span-4 order-1"></div>
-
+            
             <div class="flex items-center justify-center relative md:col-span-1 order-2 w-8 md:w-auto flex-shrink-0">
               <div class="${railClass}"></div>
               <button onclick="toggleTimelineCard('${item.id}')" aria-label="Toggle details for ${item.company}" class="absolute w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-900 border-2 border-slate-350 dark:border-slate-700 flex items-center justify-center z-10 transition-all duration-300 transform group-hover/row:scale-110 timeline-dot-node" id="dot-${item.id}" style="--node-brand-color: #6366f1;">
                 <span class="w-3.5 h-3.5 rounded-full transition-transform duration-300 transform scale-75 timeline-dot-center" style="background-color: var(--node-brand-color);"></span>
               </button>
             </div>
-
+            
             <div class="w-full md:col-span-4 order-3 flex flex-col justify-center items-stretch md:items-start">
               ${generateCardMarkup(item)}
             </div>
           `;
         }
-
+        
         row.innerHTML = timelineItemHTML;
         timelineFlow.appendChild(row);
       });
-
+      
       // Setup dynamic brand colors
       updateDynamicBrandStyles();
+      
+      // All items start collapsed to satisfy User Request #6 (behaving erratically in auto-expand)
     }
 
     // Timeline card compiler
@@ -1036,15 +969,15 @@ ${eduItems.map(entryHTML).join('')}
       let typeIcon = 'briefcase';
       if (item.type === 'education') typeIcon = 'graduation-cap';
       if (item.type === 'internship') typeIcon = 'award';
-
+      
       // Company link (opens in a new tab). stopPropagation so it doesn't toggle the card accordion.
       const hasLink = !!item.link;
       const linkAttrs = hasLink
         ? `href="${item.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="Visit ${item.company} (opens in a new tab)"`
         : '';
 
-      // Determine logo rendering
-      const logoInner = item.logo ? `<img src="${item.logo}" alt="${item.company} logo" class="w-full h-full object-cover">` : '';
+      // Determine logo rendering (a subtle brand ring on hover cues that a linked logo is clickable)
+      const logoInner = `<img src="${item.logo}" alt="${item.company} logo" class="w-full h-full object-cover">`;
       const logoHTML = item.logo
         ? (hasLink
             ? `<a ${linkAttrs} class="group/logo block flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 shadow-sm ring-0 ring-[var(--brand-color)] hover:ring-2 hover:border-[var(--brand-color)] transition-all duration-300 focus-visible:ring-2 outline-none">${logoInner}</a>`
@@ -1058,6 +991,67 @@ ${eduItems.map(entryHTML).join('')}
             <i data-lucide="arrow-up-right" class="w-3 h-3 opacity-40 group-hover/company:opacity-100 transition-opacity duration-200"></i>
           </a>`
         : `<span class="font-bold text-slate-850 dark:text-slate-200">${item.company}</span>`;
+
+      if (item.isMerged) {
+        // Merged Multiple-Role Segments (Tata CLiQ)
+        return `
+          <div id="card-${item.id}" onclick="event.stopPropagation(); toggleTimelineCard('${item.id}')" class="w-full text-left bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 hover:border-[var(--brand-color)] hover:shadow-lg backdrop-blur-xl rounded-2xl shadow-sm transition-all duration-300 cursor-pointer overflow-hidden relative group/card border-l-[3.5px] border-l-[var(--brand-color)]">
+            <div class="p-5">
+              <div class="flex items-center justify-between gap-3 mb-3">
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-extrabold tracking-wider uppercase bg-[var(--brand-bg)] text-[var(--brand-color)] border border-[var(--brand-bg-border)]">
+                  <i data-lucide="${typeIcon}" class="w-2.5 h-2.5"></i> ${item.type}
+                </span>
+
+                <span class="text-[10px] sm:text-xs font-bold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/85 px-2.5 py-1 rounded-md border border-slate-200/50 dark:border-slate-700/50 shadow-sm tracking-wide">
+                  ${item.period}
+                </span>
+
+                <button onclick="event.stopPropagation(); toggleTimelineCard('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-extrabold tracking-wider uppercase transition-all duration-300 bg-[var(--brand-bg)] text-[var(--brand-color)] border border-[var(--brand-bg-border)] hover:bg-[var(--brand-color)] hover:text-white dark:hover:text-slate-950 focus:outline-none" id="btn-toggle-${item.id}">
+                  <span id="btn-text-${item.id}">Details</span>
+                  <i data-lucide="chevron-down" class="w-3.5 h-3.5 transform transition-transform duration-300" id="chevron-${item.id}"></i>
+                </button>
+              </div>
+              <div class="flex items-center gap-4 min-w-0">
+                ${logoHTML}
+                <div class="min-w-0">
+                  <h3 class="text-lg font-bold font-display text-slate-900 dark:text-white leading-tight group-hover/card:text-[var(--brand-color)] transition-colors duration-200">
+                    ${item.role}
+                  </h3>
+                  <div class="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                    ${companyHTML}
+                    <span class="text-slate-400">•</span>
+                    <span class="flex items-center gap-0.5">${item.flag} ${item.location}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div id="content-grid-${item.id}" class="accordion-grid">
+              <div class="overflow-hidden">
+                <div class="px-5 pb-5 pt-3 border-t border-slate-200/30 dark:border-slate-800/30 text-sm font-medium leading-relaxed text-slate-600 dark:text-slate-300 space-y-6">
+                  ${item.roles.map((subRole, sIdx) => `
+                    <div class="${sIdx > 0 ? 'border-t border-slate-200/30 dark:border-slate-800/30 pt-5' : ''}">
+                      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
+                        <h4 class="text-sm font-extrabold text-slate-800 dark:text-slate-200">${subRole.role}</h4>
+                        <span class="text-[10px] font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200/30 dark:border-slate-750/30 self-start sm:self-auto">${subRole.period}</span>
+                      </div>
+                      <p class="text-xs mb-3 text-slate-600 dark:text-slate-400 font-medium">${formatText(subRole.description)}</p>
+                      <ul class="space-y-2 text-xs">
+                        ${subRole.highlights.map(hl => `
+                          <li class="flex items-start gap-2">
+                            <span class="mt-1.5 w-1.2 h-1.2 rounded-full bg-[var(--brand-color)] flex-shrink-0"></span>
+                            <span class="flex-1">${formatText(hl)}</span>
+                          </li>
+                        `).join('')}
+                      </ul>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
 
       // Standard single-role timeline card
       return `
@@ -1091,19 +1085,19 @@ ${eduItems.map(entryHTML).join('')}
               </div>
             </div>
           </div>
-
+          
           <div id="content-grid-${item.id}" class="accordion-grid">
             <div class="overflow-hidden">
               <div class="px-5 pb-5 pt-3 border-t border-slate-200/30 dark:border-slate-800/30 text-sm font-medium leading-relaxed text-slate-600 dark:text-slate-300 space-y-4">
                 <p>${formatText(item.description)}</p>
-
+                
                 ${item.score ? `
                   <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-indigo-500/5 dark:bg-amber-400/5 border border-indigo-500/10 dark:border-amber-400/10 text-xs font-bold">
                     <span class="text-slate-500">Academic Score:</span>
                     <span class="text-indigo-600 dark:text-amber-400 font-extrabold">${item.score}</span>
                   </div>
                 ` : ''}
-
+                
                 ${item.highlights && item.highlights.length > 0 ? `
                   <ul class="space-y-2.5">
                     ${item.highlights.map(hl => `
@@ -1127,14 +1121,14 @@ ${eduItems.map(entryHTML).join('')}
       TRAJECTORY_DATA.forEach(item => {
         const card = document.getElementById(`card-${item.id}`);
         const dotNode = document.getElementById(`dot-${item.id}`);
-
+        
         if (card && dotNode) {
           const color = isDark ? item.colors.dark : item.colors.light;
-
+          
           card.style.setProperty('--brand-color', color);
           card.style.setProperty('--brand-bg', color + '12'); // 7% opacity
           card.style.setProperty('--brand-bg-border', color + '22'); // 13% opacity
-
+          
           dotNode.style.setProperty('--node-brand-color', color);
         }
       });
@@ -1145,10 +1139,10 @@ ${eduItems.map(entryHTML).join('')}
       const ansGrid = document.getElementById(`faq-ans-${index}`);
       const btn = document.getElementById(`faq-btn-${index}`);
       const icon = document.getElementById(`faq-icon-${index}`);
-
+      
       const isOpen = ansGrid.classList.toggle('open');
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-
+      
       if (isOpen) {
         icon.classList.add('rotate-45');
         icon.style.color = '#e11d48';
@@ -1162,18 +1156,18 @@ ${eduItems.map(entryHTML).join('')}
     function toggleTimelineCard(cardId) {
       const targetItem = TRAJECTORY_DATA.find(c => c.id === cardId);
       if (!targetItem) return;
-
+      
       const grid = document.getElementById(`content-grid-${cardId}`);
       const chevron = document.getElementById(`chevron-${cardId}`);
       const card = document.getElementById(`card-${cardId}`);
       const dot = document.getElementById(`dot-${cardId}`);
       const btnText = document.getElementById(`btn-text-${cardId}`);
-
+      
       if (!grid) return;
-
+      
       const isCurrentlyOpen = grid.classList.contains('open');
       const shouldOpen = !isCurrentlyOpen;
-
+      
       // Close other cards for clean visualization
       if (shouldOpen) {
         TRAJECTORY_DATA.forEach(item => {
@@ -1183,7 +1177,7 @@ ${eduItems.map(entryHTML).join('')}
             const otherCard = document.getElementById(`card-${item.id}`);
             const otherDot = document.getElementById(`dot-${item.id}`);
             const otherBtnText = document.getElementById(`btn-text-${item.id}`);
-
+            
             if (otherGrid && otherGrid.classList.contains('open')) {
               otherGrid.classList.remove('open');
               if (otherChevron) otherChevron.classList.remove('rotate-180');
@@ -1201,7 +1195,7 @@ ${eduItems.map(entryHTML).join('')}
           }
         });
       }
-
+      
       // Update targeted card states
       if (shouldOpen) {
         grid.classList.add('open');
