@@ -155,7 +155,7 @@
     /* ==========================================================
        PRINT / PDF LAYOUT (Beta)
        Triggered by the "Download résumé (PDF)" button, which also
-       forces light mode before printing (see downloadResume()).
+       forces light mode before printing (see openResumeBuilder() / buildResumeHTML()).
        Goal: a clean, ink-friendly, single-column CV of all sections.
        ========================================================== */
     @media print {
@@ -197,6 +197,7 @@
       #faq-list > div,
       #recommendations-container > div,
       #references-grid > *,
+      #projects-grid > div,
       #competencies-grid > div { break-inside: avoid; }
 
       /* Links: show as normal text (URLs aren't useful on paper) */
@@ -211,8 +212,13 @@
   <script src="data/personal.js"></script>
   <script src="data/overview.js"></script>
   <script src="data/trajectory.js"></script>
+  <script src="data/projects.js"></script>
   <script src="data/faqs.js"></script>
   <script src="data/recommendations.js"></script>
+  <script src="data/chatbot.js"></script>
+
+  <!-- html-docx-js: converts HTML strings into a real, Word-openable .docx Blob (client-side, no backend) -->
+  <script src="https://cdn.jsdelivr.net/npm/html-docx-js/dist/html-docx.js"></script>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-850 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden relative min-h-screen">
 
@@ -247,8 +253,8 @@
             </div>
           </div>
 
-          <!-- Download résumé (PDF) — subtle, beta -->
-          <button onclick="downloadResume()" aria-label="Download résumé as PDF (beta)" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
+          <!-- Résumé builder — subtle, beta -->
+          <button onclick="openResumeBuilder()" aria-label="Open résumé builder" class="print:hidden w-40 inline-flex items-center justify-center gap-1.5 px-2 py-1.5 rounded-lg border border-slate-300/60 dark:border-slate-700/60 bg-white/20 dark:bg-slate-900/20 text-slate-500 dark:text-slate-400 text-[11px] font-semibold whitespace-nowrap hover:text-indigo-600 dark:hover:text-amber-400 hover:border-indigo-500/40 dark:hover:border-amber-400/40 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none transition-colors duration-300">
             <i data-lucide="download" class="w-3.5 h-3.5"></i>
             <span>Résumé (PDF)</span>
             <span class="text-[8px] font-bold uppercase tracking-wider opacity-70">Beta</span>
@@ -293,6 +299,9 @@
           </button>
           <button onclick="setSection('workex')" id="nav-workex" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
             Career Trajectory
+          </button>
+          <button onclick="setSection('projects')" id="nav-projects" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+            Projects
           </button>
           <button onclick="setSection('faq')" id="nav-faq" class="nav-tab px-4 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-300 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
             FAQ
@@ -370,6 +379,11 @@
         </div>
       </section>
 
+      <!-- SECTION: PROJECTS -->
+      <section id="sec-projects" class="section-pane hidden">
+        <div id="projects-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+      </section>
+
       <!-- SECTION: FAQ -->
       <section id="sec-faq" class="section-pane hidden">
         <div id="faq-list" class="space-y-4 max-w-3xl"></div>
@@ -382,12 +396,152 @@
 
     </main>
 
+    <!-- AVAILABILITY / HIRE BAR -->
+    <div id="availability-bar" class="print:hidden mt-16 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-2.5 w-2.5 flex-shrink-0">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <div>
+          <p id="availability-status" class="text-sm font-bold text-slate-900 dark:text-white"></p>
+          <p id="availability-note" class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5"></p>
+        </div>
+      </div>
+      <a id="hire-btn" href="#" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 text-sm font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none flex-shrink-0">
+        <i data-lucide="send" class="w-4 h-4"></i> Hire Me
+      </a>
+    </div>
+
     <!-- FOOTER -->
-    <footer class="mt-20 border-t border-slate-200/50 dark:border-slate-800/50 pt-8 text-center text-xs text-slate-400 dark:text-slate-500 font-medium">
+    <footer class="mt-8 border-t border-slate-200/50 dark:border-slate-800/50 pt-8 text-center text-xs text-slate-400 dark:text-slate-500 font-medium">
       <p class="mb-2">&copy; <span id="copyright-year"></span> <span id="copyright-name"></span>. All rights reserved.</p>
       <p>Modular Portfolio Format &bull; Built with Tailwind CSS & Lucide Icons</p>
     </footer>
 
+  </div>
+
+  <!-- ============================================================
+       "ASK ABOUT MY WORK" CHATBOT WIDGET (canned Q&A, no backend)
+       ============================================================ -->
+  <button id="chat-fab" onclick="toggleChat()" aria-label="Ask about my work" class="print:hidden fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 pl-4 pr-5 py-3.5 rounded-full bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 text-sm font-bold shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none">
+    <i data-lucide="message-circle" class="w-[18px] h-[18px]"></i>
+    <span class="hidden sm:inline">Ask about my work</span>
+  </button>
+
+  <div id="chat-panel" class="print:hidden hidden fixed bottom-24 right-5 z-50 w-[92vw] max-w-sm h-[70vh] max-h-[520px] rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/60 dark:border-slate-800/60 backdrop-blur-xl shadow-2xl flex flex-col overflow-hidden">
+    <!-- Header -->
+    <div class="flex items-center justify-between gap-2 px-4 py-3 border-b border-slate-200/60 dark:border-slate-800/60 bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 flex-shrink-0">
+      <div class="flex items-center gap-2 min-w-0">
+        <i data-lucide="sparkles" class="w-4 h-4 flex-shrink-0"></i>
+        <span class="font-bold text-sm truncate">Ask about my work</span>
+      </div>
+      <button onclick="toggleChat(false)" aria-label="Close chat" class="p-1 rounded-md hover:bg-white/20 dark:hover:bg-slate-950/10 transition-colors duration-200 outline-none">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm"></div>
+
+    <!-- Quick Questions -->
+    <div id="chat-quick" class="flex-shrink-0 px-3 pb-2 flex flex-wrap gap-1.5"></div>
+
+    <!-- Input -->
+    <form id="chat-form" onsubmit="return handleChatSubmit(event)" class="flex-shrink-0 flex items-center gap-2 p-3 border-t border-slate-200/60 dark:border-slate-800/60">
+      <input id="chat-input" type="text" autocomplete="off" placeholder="Type a question…" class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 text-sm border border-transparent focus:border-indigo-500 dark:focus:border-amber-400 outline-none transition-colors duration-200">
+      <button type="submit" aria-label="Send" class="flex-shrink-0 p-2.5 rounded-lg bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition-opacity duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+        <i data-lucide="send" class="w-4 h-4"></i>
+      </button>
+    </form>
+    <p class="flex-shrink-0 text-center text-[10px] text-slate-400 dark:text-slate-500 pb-2 font-medium">Answers are pre-written, not AI-generated.</p>
+  </div>
+
+  <!-- ============================================================
+       RÉSUMÉ BUILDER MODAL
+       ============================================================ -->
+  <div id="resume-builder-modal" class="print:hidden hidden fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-6">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeResumeBuilder()"></div>
+
+    <!-- Panel -->
+    <div class="relative w-full max-w-5xl h-[92vh] sm:h-[85vh] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200/60 dark:border-slate-800/60 flex flex-col overflow-hidden">
+
+      <!-- Header -->
+      <div class="flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200/60 dark:border-slate-800/60 flex-shrink-0">
+        <div class="min-w-0">
+          <h3 class="text-base font-bold font-display text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="file-text" class="w-[18px] h-[18px] text-indigo-500 dark:text-amber-400"></i> Résumé Builder
+          </h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Choose what goes in, watch it in the preview. Your on-screen page is unchanged, and your choices are saved for next time.</p>
+        </div>
+        <button onclick="closeResumeBuilder()" aria-label="Close résumé builder" class="flex-shrink-0 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Body: Options (left) + Preview (right) -->
+      <div class="flex-1 flex flex-col md:flex-row min-h-0">
+
+        <!-- Options Panel -->
+        <div class="md:w-64 flex-shrink-0 border-b md:border-b-0 md:border-r border-slate-200/60 dark:border-slate-800/60 p-4 space-y-4 overflow-y-auto">
+          <div>
+            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">Sections to include</p>
+            <div class="space-y-2">
+              <label class="flex items-center gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
+                <input type="checkbox" class="resume-section-toggle w-4 h-4 rounded accent-indigo-600 dark:accent-amber-400" data-section="summary" onchange="rebuildResumePreview()"> Summary
+              </label>
+              <label class="flex items-center gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
+                <input type="checkbox" class="resume-section-toggle w-4 h-4 rounded accent-indigo-600 dark:accent-amber-400" data-section="competencies" onchange="rebuildResumePreview()"> Core Competencies
+              </label>
+              <label class="flex items-center gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
+                <input type="checkbox" class="resume-section-toggle w-4 h-4 rounded accent-indigo-600 dark:accent-amber-400" data-section="workex" onchange="rebuildResumePreview()"> Career Trajectory
+              </label>
+              <label class="flex items-center gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
+                <input type="checkbox" class="resume-section-toggle w-4 h-4 rounded accent-indigo-600 dark:accent-amber-400" data-section="projects" onchange="rebuildResumePreview()"> Projects
+              </label>
+              <label class="flex items-center gap-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 cursor-pointer">
+                <input type="checkbox" class="resume-section-toggle w-4 h-4 rounded accent-indigo-600 dark:accent-amber-400" data-section="education" onchange="rebuildResumePreview()"> Education
+              </label>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-200/60 dark:border-slate-800/60 space-y-2">
+            <button onclick="toggleResumeEditMode()" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+              <i data-lucide="pencil" class="w-3.5 h-3.5"></i> <span id="resume-edit-toggle-label">Edit text</span>
+            </button>
+            <button onclick="resetResumeDefaults()" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Reset to defaults
+            </button>
+          </div>
+
+          <p class="text-[11px] text-slate-400 dark:text-slate-500 leading-relaxed pt-1">Tip: click <b>Edit text</b>, then click directly into the preview to tweak wording before exporting.</p>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="flex-1 min-h-0 bg-slate-100 dark:bg-slate-950 p-3 sm:p-5 overflow-auto">
+          <div class="mx-auto bg-white rounded-lg shadow-xl overflow-hidden" style="max-width:720px;">
+            <iframe id="resume-preview-frame" title="Résumé live preview" class="w-full border-0" style="height:78vh; min-height:560px;"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="flex-shrink-0 flex flex-wrap items-center justify-end gap-2 px-5 py-3.5 border-t border-slate-200/60 dark:border-slate-800/60 bg-slate-50/60 dark:bg-slate-900/60">
+        <button onclick="closeResumeBuilder()" class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          Cancel
+        </button>
+        <button onclick="downloadResumeDocx()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          <i data-lucide="file-type-2" class="w-4 h-4"></i> DOCX
+        </button>
+        <button onclick="printResumePreview()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          <i data-lucide="printer" class="w-4 h-4"></i> Print…
+        </button>
+        <button onclick="saveResumeAsPdf()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition-opacity duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-md">
+          <i data-lucide="download" class="w-4 h-4"></i> Save PDF
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- APPLICATION JAVASCRIPT -->
@@ -454,8 +608,14 @@
       updateDynamicBrandStyles();
     }
 
-    // Download résumé as PDF — opens a clean single-column résumé matching Arani's layout.
-    function downloadResume() {
+    // ============================================================
+    // RÉSUMÉ BUILDER — generates the exportable résumé HTML from a
+    // set of toggleable sections. Used by the builder modal below.
+    // ============================================================
+    const RESUME_SECTION_DEFAULTS = { summary: true, competencies: true, workex: true, projects: true, education: true };
+
+    function buildResumeHTML(sections) {
+      sections = Object.assign({}, RESUME_SECTION_DEFAULTS, sections || {});
       const base = (window.location.href.replace(/\?.*$/, '').replace(/\/[^\/]*$/, '') + '/').replace(/\/\/$/, '/');
       function assetURL(path) {
         if (!path) return '';
@@ -503,13 +663,32 @@
             <span style="font-size:9pt;color:#475569;white-space:nowrap;flex-shrink:0;">${item.period}</span>
           </div>${rolesHTML}</div>`;
       }
+      function projectHTML(proj) {
+        const tags = (proj.tags || []).length ? `<div style="margin-top:3px;">${proj.tags.map(t=>`<span style="display:inline-block;font-size:8pt;font-weight:600;color:#4338ca;background:#eef2ff;border:1px solid #c7d2fe;border-radius:999px;padding:1px 7px;margin:2px 4px 0 0;">${t}</span>`).join('')}</div>` : '';
+        const bullets = (proj.highlights||[]).length>0
+          ? `<ul style="margin:4px 0 0 16px;padding:0;">${proj.highlights.map(h=>`<li style="font-size:9pt;line-height:1.6;margin-bottom:2px;">${fmt(h)}</li>`).join('')}</ul>` : '';
+        return `<div style="margin-bottom:13px;break-inside:avoid;">
+          <div style="font-size:10pt;font-weight:700;">${proj.title}</div>
+          ${proj.summary ? `<p style="margin:3px 0 0;font-size:9pt;line-height:1.6;">${fmt(proj.summary)}</p>` : ''}
+          ${bullets}${tags}
+        </div>`;
+      }
       const workItems = TRAJECTORY_DATA.filter(e => e.type === 'work');
       const eduItems = TRAJECTORY_DATA.filter(e => e.type === 'education');
+      const projItems = typeof PROJECTS_DATA !== 'undefined' ? PROJECTS_DATA : [];
       const imgSrc = assetURL(PERSONAL_DATA.profileImage);
       const compsHTML = (OVERVIEW_DATA.competencies||[]).map(c=>
         `<p style="font-size:9.5pt;line-height:1.6;margin:0 0 5px 0;"><b>${c.title}</b> — ${fmt(c.description)}</p>`
       ).join('');
-      const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+
+      const blocks = [];
+      if (sections.summary) blocks.push(`<h2>Summary</h2><p style="font-size:9.5pt;line-height:1.65;margin:0;">${fmt(OVERVIEW_DATA.bio)}</p>`);
+      if (sections.competencies) blocks.push(`<h2>Core Competencies</h2>${compsHTML}`);
+      if (sections.workex) blocks.push(`<h2>Career Trajectory</h2>${workItems.map(entryHTML).join('')}`);
+      if (sections.projects && projItems.length) blocks.push(`<h2>Projects</h2>${projItems.map(projectHTML).join('')}`);
+      if (sections.education) blocks.push(`<h2>Education</h2>${eduItems.map(entryHTML).join('')}`);
+
+      return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
 <title>${PERSONAL_DATA.name} - ${PERSONAL_DATA.title}</title>
 <style>
   *{box-sizing:border-box;}
@@ -529,16 +708,134 @@
     <div style="font-size:8.5pt;"><b>Experience:</b> ${exp}${baseCity ? ' · <b>Base:</b> ' + baseCity : ''}</div>
   </div>
 </div>
-<h2>Summary</h2>
-<p style="font-size:9.5pt;line-height:1.65;margin:0;">${fmt(OVERVIEW_DATA.bio)}</p>
-<h2>Core Competencies</h2>${compsHTML}
-<h2>Career Trajectory</h2>${workItems.map(entryHTML).join('')}
-<h2>Education</h2>${eduItems.map(entryHTML).join('')}
+${blocks.join('\n')}
 </body></html>`;
-      const win = window.open('', '_blank', 'width=900,height=700');
-      if (!win) { alert('Please allow pop-ups for this site to download the résumé.'); return; }
-      win.document.open(); win.document.write(html); win.document.close(); win.focus();
-      setTimeout(() => { win.print(); }, 900);
+    }
+
+    // ============================================================
+    // RÉSUMÉ BUILDER MODAL — section toggles, live preview, inline
+    // edit mode, Print / Save PDF / DOCX export. Choices persist
+    // to localStorage so they're remembered next time (per Arani's
+    // "your choices are saved for next time").
+    // ============================================================
+    const RESUME_BUILDER_STORAGE_KEY = 'resumeBuilderSections';
+    let resumeEditMode = false;
+
+    function getResumeSections() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(RESUME_BUILDER_STORAGE_KEY));
+        if (saved) return Object.assign({}, RESUME_SECTION_DEFAULTS, saved);
+      } catch (e) {}
+      return Object.assign({}, RESUME_SECTION_DEFAULTS);
+    }
+
+    function saveResumeSections(sections) {
+      try { localStorage.setItem(RESUME_BUILDER_STORAGE_KEY, JSON.stringify(sections)); } catch (e) {}
+    }
+
+    function openResumeBuilder() {
+      const modal = document.getElementById('resume-builder-modal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      const sections = getResumeSections();
+      document.querySelectorAll('.resume-section-toggle').forEach(cb => {
+        cb.checked = !!sections[cb.dataset.section];
+      });
+      resumeEditMode = false;
+      updateResumeEditButton();
+      rebuildResumePreview();
+      lucide.createIcons();
+    }
+
+    function closeResumeBuilder() {
+      document.getElementById('resume-builder-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function currentResumeSections() {
+      const sections = {};
+      document.querySelectorAll('.resume-section-toggle').forEach(cb => {
+        sections[cb.dataset.section] = cb.checked;
+      });
+      return sections;
+    }
+
+    function rebuildResumePreview() {
+      const sections = currentResumeSections();
+      saveResumeSections(sections);
+      const html = buildResumeHTML(sections);
+      const iframe = document.getElementById('resume-preview-frame');
+      iframe.srcdoc = html;
+      resumeEditMode = false;
+      updateResumeEditButton();
+    }
+
+    function resetResumeDefaults() {
+      document.querySelectorAll('.resume-section-toggle').forEach(cb => {
+        cb.checked = !!RESUME_SECTION_DEFAULTS[cb.dataset.section];
+      });
+      rebuildResumePreview();
+    }
+
+    function updateResumeEditButton() {
+      const btn = document.getElementById('resume-edit-toggle-label');
+      if (btn) btn.textContent = resumeEditMode ? 'Editing… (click to lock)' : 'Edit text';
+    }
+
+    function toggleResumeEditMode() {
+      const iframe = document.getElementById('resume-preview-frame');
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      resumeEditMode = !resumeEditMode;
+      doc.body.setAttribute('contenteditable', resumeEditMode ? 'true' : 'false');
+      if (resumeEditMode) doc.body.style.outline = '2px dashed #6366f1';
+      else doc.body.style.outline = 'none';
+      updateResumeEditButton();
+    }
+
+    function getResumePreviewDoc() {
+      const iframe = document.getElementById('resume-preview-frame');
+      return iframe.contentDocument || iframe.contentWindow.document;
+    }
+
+    function printResumePreview() {
+      const iframe = document.getElementById('resume-preview-frame');
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
+    }
+
+    // "Save PDF" — same underlying mechanism as Print (browsers expose "Save as PDF"
+    // as a print destination); kept as a distinct, clearly-labelled action for parity.
+    function saveResumeAsPdf() {
+      printResumePreview();
+    }
+
+    function downloadResumeDocx() {
+      const doc = getResumePreviewDoc();
+      const fullHTML = '<!DOCTYPE html>' + doc.documentElement.outerHTML;
+      try {
+        if (typeof htmlDocx === 'undefined') throw new Error('html-docx-js not loaded');
+        const blob = htmlDocx.asBlob(fullHTML);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${PERSONAL_DATA.name.replace(/\s+/g, '_')}_Resume.docx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      } catch (e) {
+        // Graceful fallback: Word can open an .html file saved with a .doc extension.
+        const blob = new Blob(['﻿', fullHTML], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${PERSONAL_DATA.name.replace(/\s+/g, '_')}_Resume.doc`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
     }
 
     // Nav pane controller
@@ -696,9 +993,9 @@
         miniContacts.appendChild(a);
       });
       const miniPdf = document.createElement('button');
-      miniPdf.setAttribute('onclick', 'downloadResume()');
-      miniPdf.setAttribute('aria-label', 'Download résumé as PDF (beta)');
-      miniPdf.title = 'Download résumé (PDF) — Beta';
+      miniPdf.setAttribute('onclick', 'openResumeBuilder()');
+      miniPdf.setAttribute('aria-label', 'Open résumé builder');
+      miniPdf.title = 'Résumé builder — Beta';
       miniPdf.className = miniItemClass + ' ml-0.5 border-l border-slate-200/60 dark:border-slate-700/60 pl-2 rounded-l-none';
       miniPdf.innerHTML = `<i data-lucide="download" class="w-4 h-4"></i>`;
       miniContacts.appendChild(miniPdf);
@@ -722,6 +1019,13 @@
       });
 
       lucide.createIcons();
+
+      // Availability / Hire bar
+      if (PERSONAL_DATA.availability) {
+        document.getElementById('availability-status').textContent = PERSONAL_DATA.availability.status || '';
+        document.getElementById('availability-note').textContent = PERSONAL_DATA.availability.note || '';
+        document.getElementById('hire-btn').href = PERSONAL_DATA.availability.hireHref || '#';
+      }
 
       // Overview Summary
       document.getElementById('overview-bio').innerHTML = formatText(OVERVIEW_DATA.bio);
@@ -793,7 +1097,50 @@
         `;
         compGrid.appendChild(block);
       });
-      
+
+      // Projects
+      const projectsGrid = document.getElementById('projects-grid');
+      projectsGrid.innerHTML = '';
+      (typeof PROJECTS_DATA !== 'undefined' ? PROJECTS_DATA : []).forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'p-6 rounded-2xl bg-white/40 dark:bg-slate-900/40 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-xl shadow-lg hover:shadow-xl hover:border-indigo-500/30 dark:hover:border-amber-400/30 transition-all duration-300 group flex flex-col';
+
+        const tagsHTML = (proj.tags || []).map(t =>
+          `<span class="hl-sw">${t}</span>`
+        ).join(' ');
+
+        const linkHTML = proj.link
+          ? `<a href="${proj.link}" target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 dark:text-amber-400 hover:underline focus-visible:ring-2 focus-visible:ring-indigo-500 rounded outline-none">
+               View Project <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+             </a>`
+          : '';
+
+        card.innerHTML = `
+          <div class="flex items-center gap-3 mb-3">
+            ${proj.icon ? `
+              <div class="flex-shrink-0 p-2.5 rounded-lg bg-indigo-500/10 dark:bg-amber-400/10 text-indigo-600 dark:text-amber-400 group-hover:scale-110 transition-transform duration-300">
+                <i data-lucide="${proj.icon}" class="w-5 h-5"></i>
+              </div>
+            ` : ''}
+            <h4 class="text-base font-bold font-display text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-amber-400 transition-colors duration-300">${proj.title}</h4>
+          </div>
+          <p class="text-sm leading-relaxed text-slate-500 dark:text-slate-400 font-medium mb-3">${formatText(proj.summary || '')}</p>
+          ${(proj.highlights && proj.highlights.length) ? `
+            <ul class="space-y-2 text-sm mb-3">
+              ${proj.highlights.map(h => `
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-1.5 w-1.2 h-1.2 rounded-full bg-indigo-500 dark:bg-amber-400 flex-shrink-0"></span>
+                  <span class="flex-1 text-slate-600 dark:text-slate-300 font-medium">${formatText(h)}</span>
+                </li>
+              `).join('')}
+            </ul>
+          ` : ''}
+          <div class="flex flex-wrap gap-1.5 mt-auto pt-2">${tagsHTML}</div>
+          ${linkHTML}
+        `;
+        projectsGrid.appendChild(card);
+      });
+
       // FAQs
       const faqList = document.getElementById('faq-list');
       faqList.innerHTML = '';
@@ -1231,6 +1578,82 @@
           dot.querySelector('.timeline-dot-center').classList.add('scale-75');
         }
       }
+    }
+
+    // ============================================================
+    // "ASK ABOUT MY WORK" CHATBOT — canned Q&A, keyword-matched, no backend
+    // ============================================================
+    let chatInitialized = false;
+
+    function toggleChat(force) {
+      const panel = document.getElementById('chat-panel');
+      const isHidden = panel.classList.contains('hidden');
+      const shouldOpen = force === undefined ? isHidden : force;
+
+      if (shouldOpen) {
+        panel.classList.remove('hidden');
+        if (!chatInitialized) initChat();
+        setTimeout(() => document.getElementById('chat-input').focus(), 100);
+      } else {
+        panel.classList.add('hidden');
+      }
+    }
+
+    function initChat() {
+      chatInitialized = true;
+      addChatMessage('bot', `Hi! I'm a quick-answer bot for ${PERSONAL_DATA.name.split(' ')[0]}'s work. Ask me about his role, skills, projects, or experience — or tap a question below.`);
+
+      const quick = document.getElementById('chat-quick');
+      quick.innerHTML = '';
+      (typeof CHATBOT_QUICK_QUESTIONS !== 'undefined' ? CHATBOT_QUICK_QUESTIONS : []).forEach(q => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'px-2.5 py-1 rounded-full text-[11px] font-semibold bg-indigo-500/10 dark:bg-amber-400/10 text-indigo-600 dark:text-amber-400 border border-indigo-500/20 dark:border-amber-400/20 hover:bg-indigo-500/20 dark:hover:bg-amber-400/20 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500';
+        chip.textContent = q;
+        chip.onclick = () => askChat(q);
+        quick.appendChild(chip);
+      });
+    }
+
+    function addChatMessage(sender, text) {
+      const messages = document.getElementById('chat-messages');
+      const row = document.createElement('div');
+      row.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+      const bubble = document.createElement('div');
+      bubble.className = sender === 'user'
+        ? 'max-w-[85%] px-3.5 py-2 rounded-2xl rounded-br-sm bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 font-medium leading-relaxed'
+        : 'max-w-[85%] px-3.5 py-2 rounded-2xl rounded-bl-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium leading-relaxed';
+      bubble.innerHTML = formatText(text);
+      row.appendChild(bubble);
+      messages.appendChild(row);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function matchChatAnswer(question) {
+      const q = question.toLowerCase();
+      const qa = typeof CHATBOT_QA !== 'undefined' ? CHATBOT_QA : [];
+      let best = null, bestScore = 0;
+      qa.forEach(entry => {
+        let score = 0;
+        entry.keywords.forEach(kw => { if (q.includes(kw.toLowerCase())) score++; });
+        if (score > bestScore) { bestScore = score; best = entry; }
+      });
+      return best ? best.answer : (typeof CHATBOT_FALLBACK !== 'undefined' ? CHATBOT_FALLBACK : "I'm not sure — try rephrasing or check the tabs above.");
+    }
+
+    function askChat(question) {
+      addChatMessage('user', question);
+      setTimeout(() => addChatMessage('bot', matchChatAnswer(question)), 350);
+    }
+
+    function handleChatSubmit(evt) {
+      evt.preventDefault();
+      const input = document.getElementById('chat-input');
+      const value = input.value.trim();
+      if (!value) return false;
+      input.value = '';
+      askChat(value);
+      return false;
     }
   </script>
 </body>
