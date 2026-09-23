@@ -13,5 +13,19 @@ const PROJECTS_DATA = [
       "Created a hybrid recommender system combining `TF-IDF`, price scaling, and location proximity — generating top-5 property matches via weighted cosine similarity"
     ],
     link: ""
+  },
+  {
+    id: "interactive-resume",
+    title: "Interactive Résumé Template",
+    icon: "file-text",
+    tags: ["HTML", "Tailwind CSS", "JavaScript", "Lucide Icons", "GitHub Pages"],
+    summary: "The very site you're reading — a single-page, ^dependency-free^ interactive résumé hosted free on `GitHub Pages`. No build step, no framework: static HTML, a CDN `Tailwind` copy, `Lucide` icons, and plain JavaScript data files that drive every section.",
+    highlights: [
+      "Fully ^data-driven^ architecture — Overview, Career Trajectory, Projects, FAQ and Recommendations all render from small `data/*.js` files, so content updates never touch the rendering logic",
+      "Custom-built ^Résumé Builder^: toggle sections on/off, edit text inline, and export to `PDF`/Print or `DOCX` — all client-side, no backend",
+      "^Light/dark theming^ with persisted preference, a Z-pattern career timeline with expandable cards, and a fully responsive glassmorphic layout",
+      "Built-in ^\"Ask about my work\"^ canned Q&A widget — keyword-matched answers sourced straight from the site's own data, no API required"
+    ],
+    link: "https://github.com/DhyanendraSinghSikarwar/DhyanendraSinghSikarwar.github.io"
   }
 ];

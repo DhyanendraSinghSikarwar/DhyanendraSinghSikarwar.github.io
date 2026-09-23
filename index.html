@@ -408,9 +408,9 @@
           <p id="availability-note" class="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5"></p>
         </div>
       </div>
-      <a id="hire-btn" href="#" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 text-sm font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none flex-shrink-0">
+      <button id="hire-btn" type="button" onclick="openHireModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 text-sm font-bold shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-indigo-500 outline-none flex-shrink-0">
         <i data-lucide="send" class="w-4 h-4"></i> Hire Me
-      </a>
+      </button>
     </div>
 
     <!-- FOOTER -->
@@ -540,6 +540,48 @@
         <button onclick="saveResumeAsPdf()" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-bold bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 hover:opacity-90 transition-opacity duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 shadow-md">
           <i data-lucide="download" class="w-4 h-4"></i> Save PDF
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HIRE ME MODAL — a mailto: link silently does nothing on
+       machines with no default mail client configured, so this
+       gives a guaranteed-to-work fallback: copy-to-clipboard email
+       plus an explicit "open in mail app" link and LinkedIn.
+       ============================================================ -->
+  <div id="hire-modal" class="print:hidden hidden fixed inset-0 z-[60] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closeHireModal()"></div>
+
+    <div class="relative w-full max-w-sm bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200/60 dark:border-slate-800/60 overflow-hidden">
+      <div class="flex items-center justify-between gap-3 px-5 py-4 border-b border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-base font-bold font-display text-slate-900 dark:text-white flex items-center gap-2">
+          <i data-lucide="send" class="w-[18px] h-[18px] text-indigo-500 dark:text-amber-400"></i> Let's talk
+        </h3>
+        <button onclick="closeHireModal()" aria-label="Close" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 space-y-4">
+        <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Reach out directly — copy the email below, or use whichever option works on your device.</p>
+
+        <div class="flex items-center gap-2 p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60">
+          <i data-lucide="mail" class="w-4 h-4 text-slate-400 flex-shrink-0"></i>
+          <span id="hire-email-text" class="flex-1 min-w-0 truncate text-sm font-semibold text-slate-800 dark:text-slate-100"></span>
+          <button onclick="copyHireEmail()" id="hire-copy-btn" class="flex-shrink-0 px-2.5 py-1 rounded-lg text-xs font-bold bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+            Copy
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <a id="hire-mailto-link" href="#" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 dark:bg-amber-400 text-white dark:text-slate-950 text-sm font-bold hover:opacity-90 transition-opacity duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+            <i data-lucide="mail" class="w-4 h-4"></i> Open in Mail App
+          </a>
+          <a id="hire-linkedin-link" href="#" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
+            <i data-lucide="linkedin" class="w-4 h-4"></i> Message on LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -751,6 +793,50 @@ ${blocks.join('\n')}
     function closeResumeBuilder() {
       document.getElementById('resume-builder-modal').classList.add('hidden');
       document.body.style.overflow = '';
+    }
+
+    // ============================================================
+    // HIRE ME MODAL
+    // ============================================================
+    function openHireModal() {
+      document.getElementById('hire-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeHireModal() {
+      document.getElementById('hire-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function copyHireEmail() {
+      const email = document.getElementById('hire-email-text').textContent;
+      const btn = document.getElementById('hire-copy-btn');
+      const resetLabel = () => { btn.textContent = 'Copy'; };
+
+      const showCopied = () => {
+        btn.textContent = 'Copied!';
+        setTimeout(resetLabel, 1600);
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(showCopied).catch(() => fallbackCopy(email, showCopied));
+      } else {
+        fallbackCopy(email, showCopied);
+      }
+    }
+
+    function fallbackCopy(text, onDone) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(textarea);
+      if (onDone) onDone();
     }
 
     function currentResumeSections() {
@@ -1024,7 +1110,18 @@ ${blocks.join('\n')}
       if (PERSONAL_DATA.availability) {
         document.getElementById('availability-status').textContent = PERSONAL_DATA.availability.status || '';
         document.getElementById('availability-note').textContent = PERSONAL_DATA.availability.note || '';
-        document.getElementById('hire-btn').href = PERSONAL_DATA.availability.hireHref || '#';
+      }
+
+      // Hire modal fields (email, mailto fallback, LinkedIn) — sourced from contacts + availability
+      const emailContact = PERSONAL_DATA.contacts.find(c => c.type === 'email');
+      const linkedinContact = PERSONAL_DATA.contacts.find(c => c.type === 'linkedin');
+      if (emailContact) {
+        document.getElementById('hire-email-text').textContent = emailContact.label;
+        document.getElementById('hire-mailto-link').href =
+          (PERSONAL_DATA.availability && PERSONAL_DATA.availability.hireHref) || emailContact.href;
+      }
+      if (linkedinContact) {
+        document.getElementById('hire-linkedin-link').href = linkedinContact.href;
       }
 
       // Overview Summary
